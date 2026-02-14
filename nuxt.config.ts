@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    'nuxt-aos',
+    // 'nuxt-aos', // Replaced with manual plugin
     'nuxt-lucide-icons',
     // '@nuxtjs/tailwindcss' // Removed for Tailwind v4 support
   ],
@@ -19,5 +19,8 @@ export default defineNuxtConfig({
       // @ts-expect-error Type mismatch with Nuxt's Vite interface
       tailwindcss(),
     ],
+    optimizeDeps: {
+      include: ['aos'],
+    },
   },
 })
