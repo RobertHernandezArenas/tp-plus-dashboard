@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   css: ['~/assets/css/main.css'],
@@ -10,6 +12,12 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-aos',
     'nuxt-lucide-icons',
-    '@nuxtjs/tailwindcss'
-  ]
+    // '@nuxtjs/tailwindcss' // Removed for Tailwind v4 support
+  ],
+  vite: {
+    plugins: [
+      // @ts-expect-error Type mismatch with Nuxt's Vite interface
+      tailwindcss(),
+    ],
+  },
 })
