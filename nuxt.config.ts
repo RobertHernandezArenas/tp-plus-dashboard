@@ -11,8 +11,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/i18n',
     // 'nuxt-aos', // Replaced with manual plugin
-    'nuxt-lucide-icons',
     // '@nuxtjs/tailwindcss' // Removed for Tailwind v4 support
+    'nuxt-lucide-icons',
+    '@nuxt/image',
   ],
   vite: {
     plugins: [
