@@ -21,10 +21,10 @@
 			<div
 				class="bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64 flex min-h-full flex-col items-start">
 				<!-- LOGO SPACE -->
-				<div class="flex w-full items-center justify-start gap-2 bg-[#0d0d05] p-4">
+				<NuxtLink to="/" class="flex w-full items-center justify-start gap-2 bg-[#0d0d05] p-4">
 					<NuxtImg src="/images/tp-dash.svg" class="w-8" alt="Logo" />
 					<span class="is-drawer-close:hidden text-lg font-bold text-white">TRANSPALLET+</span>
-				</div>
+				</NuxtLink>
 
 				<ul class="menu w-full grow bg-[#0d0d05] text-[#bababa]">
 					<li>
@@ -36,12 +36,13 @@
 						</button>
 					</li>
 					<li>
-						<button
+						<NuxtLink
+							to="/usuarios"
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
 							data-tip="Usuarios">
 							<UsersRound class="size-5" />
 							<span class="is-drawer-close:hidden">Usuarios</span>
-						</button>
+						</NuxtLink>
 					</li>
 					<li>
 						<button
@@ -100,8 +101,12 @@
 		Building2,
 		PanelLeftClose,
 		PanelLeftOpen,
-	} from 'lucide-vue-next'
-	const isDrawerOpen = ref(false)
+} from 'lucide-vue-next'
+  
+const isDrawerOpen = ref(false)
+
+const route = useRoute()
+  console.log(route)
 </script>
 
 <style scoped>
