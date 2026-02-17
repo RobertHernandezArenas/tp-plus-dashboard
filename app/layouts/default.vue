@@ -1,25 +1,15 @@
 <template>
 	<div class="drawer lg:drawer-open">
-		<input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+		<input id="my-drawer-4" v-model="isDrawerOpen" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content">
 			<nav class="navbar bg-base-300 w-full">
 				<label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						stroke-linejoin="round"
-						stroke-linecap="round"
-						stroke-width="2"
-						fill="none"
-						stroke="currentColor"
-						class="my-1.5 inline-block size-4">
-						<path
-							d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-						<path d="M9 4v16"></path>
-						<path d="M14 10l2 2l-2 2"></path>
-					</svg>
+					<Transition name="swap" mode="out-in">
+						<PanelLeftClose v-if="isDrawerOpen" class="size-5" />
+						<PanelLeftOpen v-else class="size-5" />
+					</Transition>
 				</label>
-        <!-- navbar title -->
+				<!-- navbar title -->
 			</nav>
 			<div class="p-4">
 				<slot />
@@ -53,19 +43,19 @@
 							<span class="is-drawer-close:hidden">Usuarios</span>
 						</button>
 					</li>
-          <li>
-            <button
-              class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-              data-tip="Clientes">
-              <Building2 class="size-5" />
-              <span class="is-drawer-close:hidden">Clientes</span>
-            </button>
-          </li>
+					<li>
+						<button
+							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
+							data-tip="Clientes">
+							<Building2 class="size-5" />
+							<span class="is-drawer-close:hidden">Clientes</span>
+						</button>
+					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
 							data-tip="Conductores">
-							<IdCard  class="size-5" />
+							<IdCard class="size-5" />
 							<span class="is-drawer-close:hidden">Conductores</span>
 						</button>
 					</li>
@@ -88,9 +78,9 @@
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-							data-tip="Configuraciones">
+							data-tip="Configuración">
 							<SlidersHorizontal class="size-5" />
-							<span class="is-drawer-close:hidden">Configuraciones</span>
+							<span class="is-drawer-close:hidden">Configuración</span>
 						</button>
 					</li>
 				</ul>
@@ -100,5 +90,29 @@
 </template>
 
 <script lang="ts" setup>
-	import { UsersRound, LayoutDashboard, SlidersHorizontal, Waypoints, Van, IdCard, Building2 } from 'lucide-vue-next'
+	import {
+		UsersRound,
+		LayoutDashboard,
+		SlidersHorizontal,
+		Waypoints,
+		Van,
+		IdCard,
+		Building2,
+		PanelLeftClose,
+		PanelLeftOpen,
+	} from 'lucide-vue-next'
+	const isDrawerOpen = ref(false)
 </script>
+
+<style scoped>
+	.swap-enter-active,
+	.swap-leave-active {
+		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.swap-enter-from,
+	.swap-leave-to {
+		opacity: 0;
+		transform: scale(0.8) rotate(-15deg);
+	}
+</style>
