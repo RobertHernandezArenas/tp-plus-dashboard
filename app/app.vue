@@ -49,14 +49,6 @@
 			{ name: 'twitter:app:name:android', content: 'Transpallet+ Plataforma' },
 			{ name: 'twitter:app:id:android', content: 'com.transpallet.transpallet' },
 			{ name: 'twitter:app:url:android', content: 'https://transpallet.com' },
-			{ name: 'twitter:app:name:windowsphone', content: 'Transpallet+ Plataforma' },
-			{ name: 'twitter:app:id:windowsphone', content: 'com.transpallet.transpallet' },
-			{ name: 'twitter:app:url:windowsphone', content: 'https://transpallet.com' },
-			{ name: 'twitter:app:name:windowsphone', content: 'Transpallet+ Plataforma' },
-			{ name: 'twitter:app:id:windowsphone', content: 'com.transpallet.transpallet' },
-			{ name: 'twitter:app:url:windowsphone', content: 'https://transpallet.com' },
-			{ name: 'twitter:app:name:windowsphone', content: 'Transpallet+ Plataforma' },
-			{ name: 'twitter:app:id:windowsphone', content: 'com.transpallet.transpallet' },
 		],
 	})
 </script>
