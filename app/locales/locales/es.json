@@ -1,0 +1,30 @@
+{
+	"common": {
+		"loading": "Cargando...",
+		"error": "Error",
+		"submit": "Enviar",
+		"cancel": "Cancelar",
+		"save": "Guardar",
+		"delete": "Eliminar"
+	},
+	"auth": {
+		"login": {
+			"title": "Iniciar Sesión",
+			"email": "Correo Electrónico",
+			"password": "Contraseña",
+			"button": "Iniciar Sesión",
+			"error": "Error de Acceso",
+			"welcome": "Bienvenido",
+			"platform": "Transpallet Plus Plataforma"
+		}
+	},
+	"nav": {
+		"dashboard": "Vista General",
+		"users": "Usuarios",
+		"clients": "Clientes",
+		"drivers": "Conductores",
+		"fleet": "Flota",
+		"routes": "Rutas",
+		"settings": "Configuración"
+	}
+}

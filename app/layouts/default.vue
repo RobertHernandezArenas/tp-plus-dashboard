@@ -3,15 +3,28 @@
 		<input id="my-drawer-4" v-model="isDrawerOpen" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content">
 			<nav class="navbar bg-base-300 w-full">
-				<label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
-					<Transition name="swap" mode="out-in">
-						<PanelLeftClose v-if="isDrawerOpen" class="size-5" />
-						<PanelLeftOpen v-else class="size-5" />
-					</Transition>
-				</label>
-				<!-- navbar title -->
+				<div class="flex-none">
+					<label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
+						<Transition name="swap" mode="out-in">
+							<PanelLeftClose v-if="isDrawerOpen" class="size-5" />
+							<PanelLeftOpen v-else class="size-5" />
+						</Transition>
+					</label>
+				</div>
+				<div class="flex-1"></div>
+				<div class="flex-none gap-2">
+					<select v-model="locale" class="select select-bordered select-sm">
+						<option v-for="l in locales" :key="l.code" :value="l.code">
+							{{ l.name }}
+						</option>
+					</select>
+					<button class="btn btn-ghost btn-circle" @click="toggleTheme">
+						<Sun v-if="theme === 'dark'" class="size-5" />
+						<Moon v-else class="size-5" />
+					</button>
+				</div>
 			</nav>
-			<div class="p-4">
+			<div>
 				<slot />
 			</div>
 		</div>
@@ -30,58 +43,58 @@
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Vista General">
+							:data-tip="t('nav.dashboard')">
 							<LayoutDashboard class="size-5" />
-							<span class="is-drawer-close:hidden">Vista General</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.dashboard') }}</span>
 						</button>
 					</li>
 					<li>
 						<NuxtLink
 							to="/usuarios"
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Usuarios">
+							:data-tip="t('nav.users')">
 							<UsersRound class="size-5" />
-							<span class="is-drawer-close:hidden">Usuarios</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.users') }}</span>
 						</NuxtLink>
 					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Clientes">
+							:data-tip="t('nav.clients')">
 							<Building2 class="size-5" />
-							<span class="is-drawer-close:hidden">Clientes</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.clients') }}</span>
 						</button>
 					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Conductores">
+							:data-tip="t('nav.drivers')">
 							<IdCard class="size-5" />
-							<span class="is-drawer-close:hidden">Conductores</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.drivers') }}</span>
 						</button>
 					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Flota">
+							:data-tip="t('nav.fleet')">
 							<Van class="size-5" />
-							<span class="is-drawer-close:hidden">Flota</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.fleet') }}</span>
 						</button>
 					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
-							data-tip="Rutas">
+							:data-tip="t('nav.routes')">
 							<Waypoints class="size-5" />
-							<span class="is-drawer-close:hidden">Rutas</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.routes') }}</span>
 						</button>
 					</li>
 					<li>
 						<button
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-							data-tip="Configuración">
+							:data-tip="t('nav.settings')">
 							<SlidersHorizontal class="size-5" />
-							<span class="is-drawer-close:hidden">Configuración</span>
+							<span class="is-drawer-close:hidden">{{ t('nav.settings') }}</span>
 						</button>
 					</li>
 				</ul>
@@ -101,12 +114,24 @@
 		Building2,
 		PanelLeftClose,
 		PanelLeftOpen,
-} from 'lucide-vue-next'
-  
-const isDrawerOpen = ref(false)
+		Moon,
+		Sun,
+	} from 'lucide-vue-next'
 
-const route = useRoute()
-  console.log(route)
+	const { t, locale, locales } = useI18n()
+	const isDrawerOpen = ref(false)
+	const theme = ref('light')
+
+	const route = useRoute()
+
+	onMounted(() => {
+		theme.value = document.documentElement.getAttribute('data-theme') || 'light'
+	})
+
+	const toggleTheme = () => {
+		theme.value = theme.value === 'light' ? 'dark' : 'light'
+		document.documentElement.setAttribute('data-theme', theme.value)
+	}
 </script>
 
 <style scoped>

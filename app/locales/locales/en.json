@@ -1,0 +1,30 @@
+{
+	"common": {
+		"loading": "Loading...",
+		"error": "Error",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"save": "Save",
+		"delete": "Delete"
+	},
+	"auth": {
+		"login": {
+			"title": "Login",
+			"email": "Email",
+			"password": "Password",
+			"button": "Login",
+			"error": "Access Error",
+			"welcome": "Welcome",
+			"platform": "Transpallet Plus Platform"
+		}
+	},
+	"nav": {
+		"dashboard": "Overview",
+		"users": "Users",
+		"clients": "Clients",
+		"drivers": "Drivers",
+		"fleet": "Fleet",
+		"routes": "Routes",
+		"settings": "Settings"
+	}
+}

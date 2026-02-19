@@ -1,41 +1,35 @@
 {
-  "name": "tp-plus-dashboard",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@nuxt/eslint": "1.15.1",
-    "@nuxt/fonts": "0.13.0",
-    "@nuxt/image": "2.0.0",
-    "@nuxtjs/eslint-module": "4.1.0",
-    "@nuxtjs/i18n": "10.2.3",
-    "@nuxtjs/seo": "3.4.0",
-    "@pinia/nuxt": "0.11.3",
-    "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/vue-query": "^5.92.9",
-    "@types/aos": "^3.0.7",
-    "aos": "^2.3.4",
-    "lucide-vue-next": "^0.564.0",
-    "nuxt": "^4.3.1",
-    "nuxt-lucide-icons": "2.0.0",
-    "nuxt-seo-utils": "7.0.19",
-    "nuxt-swiper": "2.0.1",
-    "pinia": "^3.0.4",
-    "vue": "^3.5.28",
-    "vue-router": "^4.6.4",
-    "zod": "^4.3.6"
-  },
-  "devDependencies": {
-    "daisyui": "^5.5.18",
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "sass": "^1.97.3",
-    "tailwindcss": "4.1"
-  }
+	"name": "tp-plus-dashboard",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"@nuxt/eslint": "1.15.1",
+		"@nuxt/fonts": "0.13.0",
+		"@nuxt/image": "2.0.0",
+		"@nuxtjs/i18n": "10.2.3",
+		"@pinia/nuxt": "0.11.3",
+		"@tailwindcss/vite": "^4.1.18",
+		"@tanstack/vue-query": "^5.92.9",
+		"@types/aos": "^3.0.7",
+		"aos": "^2.3.4",
+		"lucide-vue-next": "^0.564.0",
+		"nuxt": "^4.3.1",
+		"pinia": "^3.0.4",
+		"vue": "^3.5.28",
+		"vue-router": "^4.6.4",
+		"zod": "^4.3.6"
+	},
+	"devDependencies": {
+		"daisyui": "^5.5.18",
+		"prettier": "^3.8.1",
+		"prettier-plugin-tailwindcss": "^0.7.2",
+		"tailwindcss": "4.1"
+	}
 }
