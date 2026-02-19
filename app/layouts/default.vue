@@ -41,12 +41,13 @@
 
 				<ul class="menu w-full grow bg-[#0d0d05] text-[#bababa]">
 					<li>
-						<button
+						<NuxtLink
+							to="/overview"
 							class="is-drawer-close:tooltip is-drawer-close:tooltip-right text-[16px]"
 							:data-tip="t('nav.dashboard')">
 							<LayoutDashboard class="size-5" />
 							<span class="is-drawer-close:hidden">{{ t('nav.dashboard') }}</span>
-						</button>
+						</NuxtLink>
 					</li>
 					<li>
 						<NuxtLink
@@ -104,6 +105,7 @@
 </template>
 
 <script lang="ts" setup>
+	import { useI18n } from 'vue-i18n'
 	import {
 		UsersRound,
 		LayoutDashboard,
@@ -118,7 +120,18 @@
 		Sun,
 	} from 'lucide-vue-next'
 
-	const { t, locale, locales } = useI18n()
+	const { t, locale } = useI18n()
+	const localeCookie = useCookie('i18n_redirected')
+
+	watch(locale, newLocale => {
+		localeCookie.value = newLocale
+	})
+
+	const locales = [
+		{ code: 'es', name: 'Español' },
+		{ code: 'en', name: 'English' },
+		{ code: 'pl', name: 'Polski' },
+	]
 	const isDrawerOpen = ref(false)
 	const theme = ref('light')
 

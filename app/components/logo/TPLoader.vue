@@ -13,53 +13,8 @@
 					d="M80.1347 52.9043C87.2116 52.9043 94.2886 52.9043 101.365 52.9043C101.379 54.1022 101.302 55.2945 101.135 56.4812C99.4152 66.2358 94.6076 73.9859 86.7116 79.7312C81.1893 83.933 74.9585 86.3753 68.0193 87.0581C62.0967 87.1735 56.1737 87.212 50.2501 87.1735C48.9979 93.1056 47.6903 99.1056 46.327 105.174C39.2885 105.174 32.2501 105.174 25.2116 105.174C25.2001 104.518 25.3347 103.903 25.6155 103.327C26.6687 98.1481 27.8034 92.9366 29.0193 87.6928C29.8285 83.7534 30.6747 79.7534 31.5578 75.6928C31.8697 74.7543 32.312 73.889 32.8847 73.0966C33.7545 71.9769 34.8506 71.0347 36.1732 70.2697C36.1347 70.2313 36.0962 70.1927 36.0578 70.1543C36.8581 69.8492 37.6466 69.5223 38.4232 69.1735C39.2028 68.9515 39.9914 68.7785 40.7885 68.6543C49.827 68.6159 58.8655 68.5773 67.9039 68.5389C71.2865 67.9566 74.0365 66.3219 76.1539 63.6351C77.802 61.28 78.9558 58.7031 79.6155 55.9043C79.7377 54.8902 79.9107 53.8901 80.1347 52.9043Z" />
 			</g>
 		</g>
-		<!-- Code injected by live-server -->
 	</svg>
 </template>
-
-<script lang="ts" setup>
-	import { onMounted, onUnmounted } from 'vue'
-
-	onMounted(() => {
-		if ('WebSocket' in window) {
-			;(function () {
-				function refreshCSS() {
-					var sheets = [].slice.call(document.getElementsByTagName('link'))
-					var head = document.getElementsByTagName('head')[0]
-					for (var i = 0; i < sheets.length; ++i) {
-						var elem = sheets[i]
-						var parent = elem.parentElement || head
-						parent.removeChild(elem)
-						var rel = elem.rel
-						if (
-							(elem.href && typeof rel != 'string') ||
-							rel.length == 0 ||
-							rel.toLowerCase() == 'stylesheet'
-						) {
-							var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '')
-							elem.href =
-								url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + new Date().valueOf()
-						}
-						parent.appendChild(elem)
-					}
-				}
-				var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://'
-				var address = protocol + window.location.host + window.location.pathname + '/ws'
-				var socket = new WebSocket(address)
-				socket.onmessage = function (msg) {
-					if (msg.data == 'reload') window.location.reload()
-					else if (msg.data == 'refreshcss') refreshCSS()
-				}
-				if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-					console.log('Live reload enabled.')
-					sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true)
-				}
-			})()
-		} else {
-			console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.')
-		}
-	})
-</script>
 
 <style>
 	/* --- Animaciones Originales --- */
@@ -141,7 +96,7 @@
 		stroke-dashoffset: 500; /* Empieza oculto */
 		/* Ejecuta 'drawStroke' primero, espera 0.35s y ejecuta 'fillFadeIn' */
 		animation:
-			drawStroke .65s ease-in-out forwards 0.35s,
-			/* Empieza después del círculo */ fillFadeIn 0.35s ease-in-out forwards 1s; /* Empieza cuando termina de dibujar */
+			drawStroke .975s ease-in-out ,
+			/* Empieza después del círculo */ fillFadeIn 0.55s ease-in-out both .75s; /* Empieza cuando termina de dibujar */
 	}
 </style>
