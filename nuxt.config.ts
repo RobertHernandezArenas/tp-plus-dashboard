@@ -6,7 +6,14 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	css: ['~/assets/css/main.css'],
 	devtools: { enabled: false },
-	modules: ['@nuxt/eslint', '@nuxt/fonts', '@pinia/nuxt', '@nuxt/image'],
+	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxtjs/google-fonts', '@pinia/nuxt', '@nuxt/image'],
+
+	googleFonts: {
+		families: {
+			Outfit: [300, 400, 500, 600, 700, 800, 900],
+		},
+		display: 'swap',
+	},
 
 	telemetry: false, // Disable telemetry for speed
 	vite: {

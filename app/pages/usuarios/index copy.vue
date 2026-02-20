@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Usuarios</h1>
+		<h1>{{ t('nav.users') }}</h1>
 	</div>
 
 	<div class="overflow-x-auto">
@@ -164,8 +164,12 @@
 </template>
 
 <script lang="ts" setup>
+	import { useI18n } from 'vue-i18n'
+
+	const { t } = useI18n()
+
 	useHead({
-		title: 'Administración de usuarios',
+		title: t('nav.users'),
 		meta: [{ name: 'description', content: 'Lista y gestión de usuarios del sistema' }],
 	})
 
