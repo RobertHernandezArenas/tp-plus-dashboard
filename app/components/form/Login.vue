@@ -98,103 +98,158 @@
 </script>
 
 <template>
-	<div class="card bg-base-100 w-full max-w-sm">
-		<div class="card-body bg-[#12110D]">
-			<!-- Loading Screen -->
-			<div v-if="isPending" class="flex h-full w-full flex-col items-center justify-center gap-3">
-				<LogoTPLoader />
-				<p class="text-xl font-bold">Cargando...</p>
-			</div>
+	<div class="mx-auto w-full max-w-md">
+		<div
+			class="relative space-y-8 rounded-[2.5rem] border border-[#FFFFFF]/10 bg-[#000000]/60 p-8 shadow-2xl backdrop-blur-3xl sm:p-12">
+			<!-- Glow sutil dentro de la tarjeta -->
+			<div
+				class="pointer-events-none absolute inset-0 z-0 rounded-[2.5rem] bg-linear-to-b from-[#FFFF00]/5 to-transparent"></div>
 
-			<!-- Error Screen -->
-			<div v-else-if="isError" class="flex flex-col items-center justify-center py-8 text-center">
-				<div class="bg-error/10 text-error mb-4 rounded-full p-3">
-					<AlertCircle class="h-8 w-8" />
-				</div>
-				<h2 class="text-error mb-2 text-xl font-bold">Error de Acceso</h2>
-				<p class="text-base-content/70 mb-6 text-sm">
-					{{ error?.message || 'Ocurrió un error inesperado' }}
-				</p>
-				<button class="btn btn-primary w-full" @click="resetMutation">Intentar de nuevo</button>
-			</div>
-
-			<!-- Login Form -->
-			<form v-else class="flex flex-col gap-8" @submit.prevent="onSubmit">
-				<div class="flex flex-col items-center gap-3 text-center">
-					<div>
-						<LogoTP class="h-20 w-20" />
-					</div>
-					<h2 class="light:text-black text-2xl font-bold dark:text-white">
-						{{ t('auth.login.platform') }}
-					</h2>
-					<p class="light:text-black text-sm dark:text-white">Plataforma de gestión</p>
-				</div>
-
-				<div class="form-control">
-					<label class="label">
-						<span class="label-text mb-2 text-[12px] text-neutral-500">
-							{{ t('auth.login.email') }}
-						</span>
-					</label>
+			<div class="relative z-10 w-full">
+				<!-- Loading Screen -->
+				<div v-if="isPending" class="flex h-full w-full flex-col items-center justify-center gap-5 py-10">
 					<div class="relative">
-						<input
-							v-model="form.email"
-							type="email"
-							inputmode="email"
-							autocomplete="username"
-							placeholder="usuario@ejemplo.com"
-							class="input input-bordered w-full rounded-lg pl-10 outline-2 focus:border-[#FFFF00] focus:outline-[#FFFF00]"
-							:class="{ 'input-error': errors.email }"
-							@input="clearError('email')" />
-						<Mail class="text-base-content/50 absolute top-3 left-3 h-5 w-5" />
+						<div class="absolute inset-0 rounded-full bg-[#FFFF00]/20 blur-2xl"></div>
+						<LogoTPLoader class="relative h-20 w-20" />
 					</div>
-					<span v-if="errors.email" class="text-error mt-1 text-xs">{{ errors.email }}</span>
+					<p class="animate-pulse text-xl font-bold tracking-wide text-[#FFFFFF]/90">
+						Iniciando sesión...
+					</p>
 				</div>
 
-				<div class="form-control">
-					<label class="label">
-						<span class="label-text mb-2 text-[12px] text-neutral-500">
-							{{ t('auth.login.password') }}
-						</span>
-					</label>
-					<div class="relative">
-						<input
-							v-model="form.password"
-							:type="showPassword ? 'text' : 'password'"
-							inputmode="text"
-							autocomplete="current-password"
-							placeholder="••••••••"
-							class="input input-bordered w-full rounded-lg pr-10 pl-10 outline-2 focus:border-[#FFFF00] focus:outline-[#FFFF00]"
-							:class="{ 'input-error': errors.password }"
-							@input="clearError('password')" />
-						<Lock class="text-base-content/50 absolute top-3 left-3 h-5 w-5" />
-						<button
-							type="button"
-							class="text-base-content/50 hover:text-base-content absolute top-3 right-3"
-							@click="showPassword = !showPassword">
-							<Eye v-if="showPassword" class="h-5 w-5" />
-							<EyeOff v-else class="h-5 w-5" />
-						</button>
+				<!-- Error Screen -->
+				<div v-else-if="isError" class="flex flex-col items-center justify-center py-6 text-center">
+					<div
+						class="mb-5 rounded-full bg-[#ff0000]/10 p-4 text-[#ff0000] shadow-[0_0_30px_rgba(255,0,0,0.2)] ring-1 ring-[#ff0000]/30">
+						<AlertCircle class="h-10 w-10" />
 					</div>
-					<span v-if="errors.password" class="text-error mt-1 text-xs">{{ errors.password }}</span>
-				</div>
-
-				<div class="form-control mt-2">
+					<h2 class="mb-3 text-2xl font-bold text-[#ff0000]">Error de Acceso</h2>
+					<p class="mb-8 max-w-xs text-center text-sm font-medium text-[#FFFFFF]/60">
+						{{ error?.message || 'Ocurrió un error inesperado al conectar.' }}
+					</p>
 					<button
-						class="group relative h-12 w-full rounded-full border bg-[#FFFF00] px-4 text-neutral-950">
-						<span class="relative inline-flex overflow-hidden" type="submit" :disabled="isPending">
-							<div
-								class="translate-y-0 skew-y-0 font-bold transition duration-500 group-hover:-translate-y-[110%] group-hover:skew-y-[9deg]">
-								{{ t('auth.login.button') }}
-							</div>
-							<div
-								class="absolute translate-y-[115%] skew-y-12 font-bold transition duration-500 group-hover:translate-y-0 group-hover:skew-y-0">
-								{{ t('auth.login.button') }}
-							</div>
-						</span>
+						class="btn btn-ghost h-14 w-full rounded-2xl border border-[#FFFFFF]/10 font-semibold text-[#FFFFFF] transition-colors hover:bg-[#FFFFFF]/10"
+						@click="resetMutation">
+						Intentar de nuevo
 					</button>
 				</div>
-			</form>
+
+				<!-- Login Form -->
+				<form v-else class="flex flex-col gap-8" @submit.prevent="onSubmit">
+					<div class="flex flex-col items-center gap-3 text-center">
+						<!-- Logo con resplandor -->
+						<div class="relative mb-3">
+							<div class="absolute inset-0 scale-110 rounded-full bg-[#FFFF00]/20 blur-2xl"></div>
+							<LogoTP class="relative h-20 w-20 drop-shadow-2xl" />
+						</div>
+						<h2 class="text-4xl font-black tracking-tighter text-[#FFFFFF]">
+							{{ t('auth.login.platform') }}
+						</h2>
+						<p class="text-xs font-bold tracking-widest text-[#FFFFFF]/50 uppercase">
+							Plataforma de gestión de rutas
+						</p>
+					</div>
+
+					<div class="space-y-6">
+						<div class="form-control">
+							<label class="label pb-2">
+								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
+									{{ t('auth.login.email') }}
+								</span>
+							</label>
+							<div class="group relative">
+								<input
+									v-model="form.email"
+									type="email"
+									inputmode="email"
+									autocomplete="username"
+									placeholder="usuario@ejemplo.com"
+									class="input input-bordered h-14 w-full rounded-2xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 pl-12 text-lg font-medium text-[#FFFFFF] transition-all outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000]/80 focus:ring-2 focus:ring-[#FFFF00]/20"
+									:class="{
+										'border-[#ff0000]/50 focus:border-[#ff0000]/50 focus:ring-[#ff0000]/20':
+											errors.email,
+									}"
+									@input="clearError('email')" />
+								<Mail
+									class="absolute top-4 left-4 h-6 w-6 text-[#FFFFFF]/40 transition-colors group-focus-within:text-[#FFFF00]"
+									:class="{ 'text-[#ff0000]/70': errors.email }" />
+							</div>
+							<span v-if="errors.email" class="mt-2 ml-1 text-xs font-bold text-[#ff0000]">
+								{{ errors.email }}
+							</span>
+						</div>
+
+						<div class="form-control">
+							<label class="label flex justify-between pb-2">
+								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
+									{{ t('auth.login.password') }}
+								</span>
+							</label>
+							<div class="group relative">
+								<input
+									v-model="form.password"
+									:type="showPassword ? 'text' : 'password'"
+									inputmode="text"
+									autocomplete="current-password"
+									placeholder="••••••••"
+									class="input input-bordered h-14 w-full rounded-2xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 pr-12 pl-12 text-lg font-medium tracking-widest text-[#FFFFFF] transition-all outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000]/80 focus:ring-2 focus:ring-[#FFFF00]/20"
+									:class="{
+										'border-[#ff0000]/50 focus:border-[#ff0000]/50 focus:ring-[#ff0000]/20':
+											errors.password,
+									}"
+									@input="clearError('password')" />
+								<Lock
+									class="absolute top-4 left-4 h-6 w-6 text-[#FFFFFF]/40 transition-colors group-focus-within:text-[#FFFF00]"
+									:class="{ 'text-[#ff0000]/70': errors.password }" />
+								<button
+									type="button"
+									class="absolute top-4 right-4 text-[#FFFFFF]/40 transition-colors hover:text-[#FFFF00] focus:outline-none"
+									@click="showPassword = !showPassword">
+									<Eye v-if="showPassword" class="h-6 w-6" />
+									<EyeOff v-else class="h-6 w-6" />
+								</button>
+							</div>
+							<span
+								v-if="errors.password"
+								class="mt-2 ml-1 text-xs font-bold tracking-normal text-[#ff0000]">
+								{{ errors.password }}
+							</span>
+						</div>
+					</div>
+
+					<div class="form-control mt-4">
+						<button
+							class="group relative flex h-14 w-full items-center justify-center overflow-hidden rounded-2xl bg-[#FFFF00] text-lg font-black tracking-wide text-[#000000] uppercase shadow-[0_0_20px_rgba(255,255,0,0.15)] transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,0,0.3)] disabled:opacity-70 disabled:hover:scale-100"
+							type="submit"
+							:disabled="isPending">
+							<span class="relative z-10 flex items-center justify-center gap-2">
+								{{ t('auth.login.button') }}
+							</span>
+							<!-- Efecto de brillo en hover -->
+							<div
+								class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-[#FFFFFF]/60 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></div>
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </template>
+
+<style scoped>
+	@keyframes shimmer {
+		100% {
+			transform: translateX(100%);
+		}
+	}
+
+	/* Fix browser autofill background color */
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		-webkit-box-shadow: 0 0 0 30px #12110d inset !important;
+		-webkit-text-fill-color: #ffffff !important;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+</style>
