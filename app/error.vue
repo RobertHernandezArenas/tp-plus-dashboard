@@ -74,7 +74,7 @@
 				</button>
 				<button
 					@click="handleError"
-					class="btn btn-lg rounded-2xl border-none bg-[#FFFF00] font-semibold text-[#000000] shadow-lg shadow-[#FFFF00]/25 transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFFF00]/80">
+					class="btn btn-ghost group h-14 btn-lg rounded-2xl border-none bg-[#FFFF00] font-semibold text-[#000000] shadow-lg shadow-[#FFFF00]/25 transition-all duration-300 hover:-translate-y-1 hover:bg-[#FFFF00]/80">
 					<Home class="mr-2 size-5" />
 					Volver al Inicio
 				</button>
