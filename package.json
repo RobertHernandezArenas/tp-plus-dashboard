@@ -8,7 +8,13 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"seed": "tsx seed/seed-db.ts"
+		"seed": "tsx ./seeds/seed-db.ts",
+		"seed:db": "tsx ./seeds/seed-db.ts",
+		"prisma:init": "pnpx prisma init --datasource-provider mysql --output prisma/generated/prisma",
+		"prisma:pull": "pnpx prisma db pull --schema prisma/schema.prisma",
+		"prisma:generate": "pnpx prisma generate --schema prisma/schema.prisma",
+		"prisma:migrate": "pnpx prisma migrate dev --schema prisma/schema.prisma",
+		"prisma:reset": "pnpx prisma migrate reset --schema prisma/schema.prisma"
 	},
 	"dependencies": {
 		"@nuxt/eslint": "1.15.1",
