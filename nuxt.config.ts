@@ -6,7 +6,14 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	css: ['~/assets/css/main.css'],
 	devtools: { enabled: false },
-	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxtjs/google-fonts', '@pinia/nuxt', '@nuxt/image'],
+	modules: [
+		'@nuxt/eslint',
+		'@nuxt/fonts',
+		'@nuxtjs/google-fonts',
+		'@pinia/nuxt',
+		'@nuxt/image',
+		'@prisma/nuxt',
+	],
 
 	googleFonts: {
 		families: {
@@ -17,12 +24,18 @@ export default defineNuxtConfig({
 
 	telemetry: false, // Disable telemetry for speed
 	vite: {
+		resolve: {
+			alias: {
+				'.prisma/client/index-browser': './node_modules/@prisma/client/index-browser.js',
+			},
+		},
 		plugins: [
 			// @ts-expect-error Type mismatch with Nuxt's Vite interface
 			tailwindcss(),
 		],
 		optimizeDeps: {
-			include: ['aos', 'lucide-vue-next', '@tanstack/vue-query', 'vue-i18n', 'zod'],
+			include: ['aos', 'lucide-vue-next', '@tanstack/vue-query', 'vue-i18n', 'zod', "@prisma/nuxt"],
+			exclude: ['@prisma/client', '.prisma/client/index-browser'],
 		},
 	},
 })
