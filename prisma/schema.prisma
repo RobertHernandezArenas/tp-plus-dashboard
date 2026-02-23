@@ -1,45 +1,31 @@
 generator client {
-  provider = "prisma-client"
-  output   = "prisma/generated/prisma"
+  provider   = "prisma-client-js"
+  engineType = "library"
 }
 
 datasource db {
   provider = "mysql"
 }
 
-model users {
-  user_id         String              @id @db.Char(100)
-  first_name      String              @db.VarChar(50)
-  last_name       String              @db.VarChar(50)
-  address         String              @db.VarChar(25)
-  city            String              @db.VarChar(25)
-  country         String              @default("SPAIN") @db.VarChar(25)
-  document_number String              @db.VarChar(25)
-  document_type   users_document_type @default(DNI)
-  email           String              @unique @db.VarChar(50)
-  password        String              @db.VarChar(255)
-  phone           String              @db.VarChar(25)
-  role            users_role          @default(USER)
-  status          users_status        @default(ACTIVATED)
-  zip_code        String              @db.VarChar(25)
-  created_at      DateTime            @default(now())
-  updated_at      DateTime
+model User {
+  user_id        String     @id @default(uuid()) @db.Char(100)
+  email          String     @unique @db.VarChar(50)
+  password       String     @db.VarChar(255)
+  role           Role       @default(USER)
+  account_status UserStatus @default(ACTIVATED)
+  refresh_token  String?    @db.Text
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @updatedAt
+
+  @@map("users")
 }
 
-enum users_document_type {
-  PASSPORT
-  NIE
-  DNI
-  CIF
-}
-
-enum users_role {
+enum Role {
   ADMIN
   USER
-  DRIVER
 }
 
-enum users_status {
+enum UserStatus {
   ACTIVATED
   DEACTIVATED
 }

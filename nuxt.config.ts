@@ -6,14 +6,7 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	css: ['~/assets/css/main.css'],
 	devtools: { enabled: false },
-	modules: [
-		'@nuxt/eslint',
-		'@nuxt/fonts',
-		'@nuxtjs/google-fonts',
-		'@pinia/nuxt',
-		'@nuxt/image',
-		'@prisma/nuxt',
-	],
+	modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxtjs/google-fonts', '@pinia/nuxt', '@nuxt/image'],
 
 	googleFonts: {
 		families: {
@@ -34,8 +27,7 @@ export default defineNuxtConfig({
 			tailwindcss(),
 		],
 		optimizeDeps: {
-			include: ['aos', 'lucide-vue-next', '@tanstack/vue-query', 'vue-i18n', 'zod', "@prisma/nuxt"],
-			exclude: ['@prisma/client', '.prisma/client/index-browser'],
+			include: ['aos', 'lucide-vue-next', '@tanstack/vue-query', 'vue-i18n', 'zod'],
 		},
 	},
 })
