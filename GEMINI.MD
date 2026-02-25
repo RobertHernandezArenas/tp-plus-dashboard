@@ -1,0 +1,1 @@
+- USE always pnpm instead of npm
