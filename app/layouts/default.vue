@@ -155,6 +155,7 @@
 				<!-- Footer del Sidebar -->
 				<div class="relative z-10 flex w-full flex-col gap-4 border-t border-[#FFFFFF]/10 p-6">
 					<button
+						@click="handleLogout"
 						class="group flex w-full items-center justify-center gap-3 rounded-2xl border border-[#ff0000]/20 bg-[#ff0000]/10 px-4 py-3 font-bold text-[#ff0000] transition-all hover:bg-[#ff0000] hover:text-[#FFFFFF] hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]">
 						<LogOut class="h-5 w-5 transition-transform group-hover:-translate-x-1" />
 						<span class="text-sm">Cerrar Sesión</span>
@@ -183,6 +184,13 @@
 	const { t, locale } = useI18n()
 	const localeCookie = useCookie('i18n_redirected')
 	const route = useRoute()
+	const authStore = useAuthStore()
+	const router = useRouter()
+
+	const handleLogout = () => {
+		authStore.clearAuth()
+		router.push('/')
+	}
 
 	watch(locale, newLocale => {
 		localeCookie.value = newLocale

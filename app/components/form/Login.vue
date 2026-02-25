@@ -40,22 +40,15 @@
 
 	// API Login Function
 	const loginFn = async (credentials: typeof form) => {
-		// Aquí es donde se conecta a la API real.
-		// Ejemplo: return await $fetch('/api/auth/login', { method: 'POST', body: credentials })
-
-		// MOCK TEMPORAL para probar la UI (Carga/Error)
-		// Simular retardo de red
-		await new Promise(resolve => setTimeout(resolve, 2000))
-
-		// Simular error si usa un email específico
-		if (credentials.email.includes('error')) {
-			throw new Error(t('auth.login.error'))
-		}
-
-		// Simular éxito
-		return {
-			user: { id: 1, name: 'Usuario Demo', email: credentials.email },
-			token: 'mock-jwt-token-123456',
+		try {
+			const data = await $fetch('/api/auth/login', {
+				method: 'POST',
+				body: credentials,
+			})
+			return data as { user: any; token: string }
+		} catch (err: any) {
+			const errorMessage = err.response?._data?.statusMessage || err.message || t('auth.login.error')
+			throw new Error(errorMessage)
 		}
 	}
 
@@ -152,18 +145,20 @@
 
 					<div class="space-y-6">
 						<div class="form-control">
-							<label class="label pb-2">
+							<label class="label pb-2" for="login-email">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									{{ t('auth.login.email') }}
 								</span>
 							</label>
 							<div class="group relative">
 								<input
+									id="login-email"
 									v-model="form.email"
 									type="email"
 									inputmode="email"
 									autocomplete="username"
 									placeholder="usuario@ejemplo.com"
+									:aria-invalid="!!errors.email"
 									class="input input-bordered h-14 w-full rounded-2xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 pl-12 text-lg font-medium text-[#FFFFFF] transition-all outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000]/80 focus:ring-2 focus:ring-[#FFFF00]/20"
 									:class="{
 										'border-[#ff0000]/50 focus:border-[#ff0000]/50 focus:ring-[#ff0000]/20':
@@ -180,18 +175,20 @@
 						</div>
 
 						<div class="form-control">
-							<label class="label flex justify-between pb-2">
+							<label class="label flex justify-between pb-2" for="login-password">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									{{ t('auth.login.password') }}
 								</span>
 							</label>
 							<div class="group relative">
 								<input
+									id="login-password"
 									v-model="form.password"
 									:type="showPassword ? 'text' : 'password'"
 									inputmode="text"
 									autocomplete="current-password"
 									placeholder="••••••••"
+									:aria-invalid="!!errors.password"
 									class="input input-bordered h-14 w-full rounded-2xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 pr-12 pl-12 text-lg font-medium tracking-widest text-[#FFFFFF] transition-all outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000]/80 focus:ring-2 focus:ring-[#FFFF00]/20"
 									:class="{
 										'border-[#ff0000]/50 focus:border-[#ff0000]/50 focus:ring-[#ff0000]/20':
@@ -203,6 +200,7 @@
 									:class="{ 'text-[#ff0000]/70': errors.password }" />
 								<button
 									type="button"
+									aria-label="Toggle password visibility"
 									class="absolute top-4 right-4 text-[#FFFFFF]/40 transition-colors hover:text-[#FFFF00] focus:outline-none"
 									@click="showPassword = !showPassword">
 									<Eye v-if="showPassword" class="h-6 w-6" />

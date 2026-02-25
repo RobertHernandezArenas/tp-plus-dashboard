@@ -41,13 +41,16 @@
 
 			<!-- Search Bar flotante -->
 			<div class="group relative max-w-xl">
+				<label for="users-search" class="sr-only">Buscar usuarios</label>
 				<input
+					id="users-search"
 					v-model="searchQuery"
-					type="text"
+					type="search"
 					placeholder="Buscar por nombre, correo o rol..."
 					class="input input-bordered h-14 w-full rounded-2xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 pl-14 text-lg font-medium text-[#FFFFFF] backdrop-blur-md transition-all outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000]/80 focus:ring-2 focus:ring-[#FFFF00]/20" />
 				<Search
-					class="absolute top-4 left-5 h-6 w-6 text-[#FFFFFF]/40 transition-colors group-focus-within:text-[#FFFF00]" />
+					class="absolute top-4 left-5 h-6 w-6 text-[#FFFFFF]/40 transition-colors group-focus-within:text-[#FFFF00]"
+					aria-hidden="true" />
 			</div>
 
 			<!-- Tabla (Glass Card) -->
@@ -119,6 +122,7 @@
 										<!-- Toggle Activar/Desactivar -->
 										<button
 											class="btn btn-circle btn-sm btn-ghost hover:bg-[#FFFFFF]/10"
+											:aria-label="user.active ? 'Desactivar Usuario' : 'Activar Usuario'"
 											title="Cambiar Estado"
 											@click="toggleUserStatus(user)">
 											<ToggleRight v-if="user.active" class="h-5 w-5 text-[#FFFF00]" />
@@ -128,6 +132,7 @@
 										<!-- Editar -->
 										<button
 											class="btn btn-circle btn-sm btn-ghost hover:bg-[#FFFFFF]/10"
+											aria-label="Editar Usuario"
 											title="Editar Usuario"
 											@click="openUserModal(user)">
 											<Pencil class="h-4 w-4 text-[#FFFFFF]/70" />
@@ -136,6 +141,7 @@
 										<!-- Eliminar -->
 										<button
 											class="btn btn-circle btn-sm btn-ghost hover:bg-[#ff0000]/20"
+											aria-label="Eliminar Usuario"
 											title="Eliminar Usuario"
 											@click="confirmDelete(user)">
 											<Trash2 class="h-4 w-4 text-[#ff0000]/80" />
@@ -174,6 +180,7 @@
 
 				<form method="dialog" class="relative z-10">
 					<button
+						aria-label="Cerrar modal de usuario"
 						class="btn btn-sm btn-circle btn-ghost absolute top-0 right-0 text-xl text-[#FFFFFF]/50 hover:text-[#FFFFFF]">
 						✕
 					</button>
@@ -186,36 +193,39 @@
 
 					<div class="space-y-5">
 						<div class="form-control">
-							<label class="label pb-2">
+							<label class="label pb-2" for="user-name">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									Nombre Completo
 								</span>
 							</label>
 							<input
+								id="user-name"
 								v-model="form.name"
 								type="text"
 								placeholder="John Doe"
 								class="input input-bordered h-12 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50" />
 						</div>
 						<div class="form-control">
-							<label class="label pb-2">
+							<label class="label pb-2" for="user-email">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									Correo Electrónico
 								</span>
 							</label>
 							<input
+								id="user-email"
 								v-model="form.email"
 								type="email"
 								placeholder="john@ejemplo.com"
 								class="input input-bordered h-12 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none placeholder:text-[#FFFFFF]/30 focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50" />
 						</div>
 						<div class="form-control">
-							<label class="label pb-2">
+							<label class="label pb-2" for="user-role">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									Rol Asignado
 								</span>
 							</label>
 							<select
+								id="user-role"
 								v-model="form.role"
 								class="select select-bordered h-12 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50">
 								<option value="Admin">Administrador</option>
