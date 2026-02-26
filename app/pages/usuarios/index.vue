@@ -262,7 +262,7 @@
 								class="input input-bordered h-11 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50" />
 						</div>
 
-						<div class="form-control relative">
+						<div class="form-control dropdown w-full">
 							<label class="label pb-1" id="label-doctype">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									Tipo Documento
@@ -272,45 +272,34 @@
 								tabindex="0"
 								role="button"
 								aria-labelledby="label-doctype"
-								class="input input-bordered flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none hover:bg-[#FFFFFF]/10 focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50"
-								@click="toggleDropdown('docType')"
-								@keydown.enter.prevent="toggleDropdown('docType')"
-								@keydown.space.prevent="toggleDropdown('docType')"
-								@blur="closeDropdownDelayed('docType')">
-								<span>
+								class="input input-bordered flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] transition-all outline-none focus-within:border-[#FFFF00]/50 focus-within:bg-[#000000] focus-within:ring-1 focus-within:ring-[#FFFF00]/50 hover:bg-[#FFFFFF]/10">
+								<span class="font-medium">
 									{{ form.document_type === 'PASSPORT' ? 'Pasaporte' : form.document_type }}
 								</span>
-								<ChevronDown class="h-4 w-4 opacity-50" />
+								<ChevronDown class="h-4 w-4 opacity-50 transition-transform" />
 							</div>
-							<Transition
-								enter-active-class="transition duration-100 ease-out"
-								enter-from-class="transform scale-95 opacity-0"
-								enter-to-class="transform scale-100 opacity-100"
-								leave-active-class="transition duration-75 ease-in"
-								leave-from-class="transform scale-100 opacity-100"
-								leave-to-class="transform scale-95 opacity-0">
-								<ul
-									v-show="openDropdown === 'docType'"
-									class="absolute top-[72px] left-0 z-50 w-full rounded-xl border border-[#FFFFFF]/10 bg-[#12110D] p-1.5 shadow-2xl">
-									<li
-										v-for="type in [
-											{ value: 'DNI', label: 'DNI' },
-											{ value: 'PASSPORT', label: 'Pasaporte' },
-											{ value: 'NIE', label: 'NIE' },
-										]"
-										:key="type.value">
-										<a
-											class="flex cursor-pointer items-center rounded-lg px-3 py-2 text-sm text-[#FFFFFF] hover:bg-[#FFFFFF]/10"
-											:class="{
-												'bg-[#FFFF00]/10 font-bold text-[#FFFF00]':
-													form.document_type === type.value,
-											}"
-											@click="selectOption('document_type', type.value)">
-											{{ type.label }}
-										</a>
-									</li>
-								</ul>
-							</Transition>
+							<ul
+								tabindex="0"
+								class="menu dropdown-content z-100 mt-1 w-full rounded-xl border border-[#FFFFFF]/10 bg-[#000000] p-2 text-[#FFFFFF] shadow-[0_8px_30px_rgb(0,0,0,0.9)]">
+								<li
+									v-for="type in [
+										{ value: 'DNI', label: 'DNI' },
+										{ value: 'PASSPORT', label: 'Pasaporte' },
+										{ value: 'NIE', label: 'NIE' },
+									]"
+									:key="type.value">
+									<a
+										class="rounded-lg px-4 py-2.5 font-medium transition-colors hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]"
+										:class="
+											form.document_type === type.value
+												? 'bg-[#FFFF00]/10 text-[#FFFF00]'
+												: 'text-[#FFFFFF]/70'
+										"
+										@click="selectOption('document_type', type.value)">
+										{{ type.label }}
+									</a>
+								</li>
+							</ul>
 						</div>
 						<div class="form-control">
 							<label class="label pb-1" for="user-docnum">
@@ -337,7 +326,7 @@
 								type="tel"
 								class="input input-bordered h-11 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50" />
 						</div>
-						<div class="form-control relative">
+						<div class="form-control dropdown w-full">
 							<label class="label pb-1" id="label-role">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
 									Rol
@@ -347,41 +336,33 @@
 								tabindex="0"
 								role="button"
 								aria-labelledby="label-role"
-								class="input input-bordered flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none hover:bg-[#FFFFFF]/10 focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50"
-								@click="toggleDropdown('role')"
-								@keydown.enter.prevent="toggleDropdown('role')"
-								@keydown.space.prevent="toggleDropdown('role')"
-								@blur="closeDropdownDelayed('role')">
-								<span>{{ form.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}</span>
-								<ChevronDown class="h-4 w-4 opacity-50" />
+								class="input input-bordered flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] transition-all outline-none focus-within:border-[#FFFF00]/50 focus-within:bg-[#000000] focus-within:ring-1 focus-within:ring-[#FFFF00]/50 hover:bg-[#FFFFFF]/10">
+								<span class="font-medium">
+									{{ form.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}
+								</span>
+								<ChevronDown class="h-4 w-4 opacity-50 transition-transform" />
 							</div>
-							<Transition
-								enter-active-class="transition duration-100 ease-out"
-								enter-from-class="transform scale-95 opacity-0"
-								enter-to-class="transform scale-100 opacity-100"
-								leave-active-class="transition duration-75 ease-in"
-								leave-from-class="transform scale-100 opacity-100"
-								leave-to-class="transform scale-95 opacity-0">
-								<ul
-									v-show="openDropdown === 'role'"
-									class="absolute top-[72px] left-0 z-50 w-full rounded-xl border border-[#FFFFFF]/10 bg-[#12110D] p-1.5 shadow-2xl">
-									<li
-										v-for="role in [
-											{ value: 'ADMIN', label: 'Administrador' },
-											{ value: 'USER', label: 'Usuario' },
-										]"
-										:key="role.value">
-										<a
-											class="flex cursor-pointer items-center rounded-lg px-3 py-2 text-sm text-[#FFFFFF] hover:bg-[#FFFFFF]/10"
-											:class="{
-												'bg-[#FFFF00]/10 font-bold text-[#FFFF00]': form.role === role.value,
-											}"
-											@click="selectOption('role', role.value)">
-											{{ role.label }}
-										</a>
-									</li>
-								</ul>
-							</Transition>
+							<ul
+								tabindex="0"
+								class="menu dropdown-content z-100 mt-1 w-full rounded-xl border border-[#FFFFFF]/10 bg-[#000000] p-2 text-[#FFFFFF] shadow-[0_8px_30px_rgb(0,0,0,0.9)]">
+								<li
+									v-for="role in [
+										{ value: 'ADMIN', label: 'Administrador' },
+										{ value: 'USER', label: 'Usuario' },
+									]"
+									:key="role.value">
+									<a
+										class="rounded-lg px-4 py-2.5 font-medium transition-colors hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]"
+										:class="
+											form.role === role.value
+												? 'bg-[#FFFF00]/10 text-[#FFFF00]'
+												: 'text-[#FFFFFF]/70'
+										"
+										@click="selectOption('role', role.value)">
+										{{ role.label }}
+									</a>
+								</li>
+							</ul>
 						</div>
 
 						<div class="form-control md:col-span-2">
@@ -600,21 +581,11 @@
 	})
 
 	// --- Custom Dropdown Logic ---
-	const openDropdown = ref<string | null>(null)
-
-	const toggleDropdown = (name: string) => {
-		openDropdown.value = openDropdown.value === name ? null : name
-	}
-
-	const closeDropdownDelayed = (name: string) => {
-		setTimeout(() => {
-			if (openDropdown.value === name) openDropdown.value = null
-		}, 150)
-	}
-
 	const selectOption = (field: 'document_type' | 'role', value: string) => {
 		form[field] = value
-		openDropdown.value = null
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur()
+		}
 	}
 
 	// --- Acciones CRUD simuladas ---
