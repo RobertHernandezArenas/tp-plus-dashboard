@@ -5,7 +5,13 @@
 		"submit": "Enviar",
 		"cancel": "Cancelar",
 		"save": "Guardar",
-		"delete": "Eliminar"
+		"delete": "Eliminar",
+		"prev": "Anterior",
+		"next": "Siguiente",
+		"showing": "Mostrando",
+		"to": "a",
+		"of": "de",
+		"results": "resultados"
 	},
 	"auth": {
 		"login": {
@@ -25,6 +31,74 @@
 		"drivers": "Conductores",
 		"fleet": "Flota",
 		"routes": "Rutas",
-		"settings": "Configuración"
+		"settings": "Configuración",
+		"menu": "Menú Principal",
+		"logout": "Cerrar Sesión"
+	},
+	"users": {
+		"header": {
+			"search": "Buscar usuarios...",
+			"filters": "Filtros",
+			"create": "+ Nuevo Usuario",
+			"manage": "Administra accesos y roles"
+		},
+		"filters": {
+			"role": "Rol de Usuario",
+			"status": "Estado",
+			"document": "Documento",
+			"all": "Todos"
+		},
+		"table": {
+			"user": "Usuario",
+			"role": "Rol",
+			"contact": "Contacto",
+			"status": "Estado",
+			"actions": "Acciones",
+			"empty": "No hay usuarios registrados.",
+			"itemsPerPage": "ítems por página"
+		},
+		"form": {
+			"createTitle": "Crear Nuevo Usuario",
+			"editTitle": "Editar Usuario",
+			"name": "Nombre",
+			"surname": "Apellidos",
+			"email": "Correo Electrónico",
+			"password": "Contraseña",
+			"passwordPlaceholderEdit": "(Opcional) Dejar en blanco",
+			"passwordPlaceholderNew": "Requerida",
+			"documentType": "Tipo Documento",
+			"documentNumber": "Núm Documento",
+			"phone": "Teléfono",
+			"role": "Rol",
+			"address": "Dirección",
+			"city": "Ciudad",
+			"country": "País",
+			"saveChanges": "Guardar Cambios",
+			"createUser": "Crear Usuario"
+		},
+		"delete": {
+			"title": "Eliminar Usuario",
+			"message": "¿Estás seguro de que deseas eliminar este usuario?",
+			"warning": "Esta acción no se puede deshacer.",
+			"confirm": "Sí, Eliminar"
+		},
+		"constants": {
+			"roles": {
+				"ADMIN": "Administrador",
+				"USER": "Usuario"
+			},
+			"status": {
+				"ON": "Activo",
+				"OFF": "Inactivo"
+			}
+		},
+		"messages": {
+			"created": "Usuario creado exitosamente",
+			"updated": "Usuario actualizado exitosamente",
+			"error": "Error al guardar el usuario",
+			"statusOn": "Usuario activado",
+			"statusOff": "Usuario desactivado",
+			"toggleError": "Error al cambiar el estado"
+		}
 	}
 }

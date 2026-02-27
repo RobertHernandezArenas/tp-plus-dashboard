@@ -156,17 +156,30 @@
 	const userDeleteModal = ref<any>(null)
 
 	const toggleUserStatus = async (user: UserData) => {
+		const originalStatus = user.status
+		const newStatus = originalStatus === 'ON' ? 'OFF' : 'ON'
+
+		// Optimistic update
+		user.status = newStatus
+
 		try {
-			const newStatus = user.status === 'ON' ? 'OFF' : 'ON'
 			await $fetch(`/api/users/${user.user_id}`, {
 				method: 'PUT',
 				body: { status: newStatus },
 			})
-			await refresh()
-			showToast(`Usuario ${newStatus === 'ON' ? 'activado' : 'desactivado'}`, 'success')
+			if (newStatus === 'ON') {
+				handleToast({ message: t('users.messages.statusOn', 'Usuario activado'), type: 'success' })
+			} else {
+				handleToast({ message: t('users.messages.statusOff', 'Usuario desactivado'), type: 'success' })
+			}
+			refresh()
 		} catch (error: any) {
-			console.error('Error toggling status:', error)
-			showToast(error.data?.statusMessage || 'Error al cambiar el estado', 'error')
+			// Revert the local optimistic update if the API call failed
+			user.status = originalStatus
+			handleToast({
+				message: error.data?.message || t('users.messages.toggleError', 'Error al cambiar estado'),
+				type: 'error',
+			})
 		}
 	}
 </script>

@@ -120,7 +120,7 @@
 				<!-- Navegación -->
 				<div class="relative z-10 w-full flex-1 overflow-y-auto px-4 py-6 text-[#FFFFFF]">
 					<p class="mb-4 pl-2 text-[10px] font-black tracking-widest text-[#FFFFFF]/40 uppercase">
-						Menú Principal
+						{{ $t('nav.menu') || 'Menú Principal' }}
 					</p>
 
 					<ul class="flex w-full flex-col gap-1.5">
@@ -191,7 +191,9 @@
 							@click="handleLogout"
 							class="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#FFFFFF]/5 px-4 py-2.5 font-bold text-[#FFFFFF]/60 transition-all hover:bg-[#ff0000]/10 hover:text-[#ff0000] hover:shadow-[0_0_15px_rgba(255,0,0,0.2)]">
 							<LogOut class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-							<span class="text-xs tracking-wider uppercase">Cerrar Sesión</span>
+							<span class="text-xs tracking-wider uppercase">
+								{{ $t('nav.logout') || 'Cerrar Sesión' }}
+							</span>
 						</button>
 					</div>
 				</div>

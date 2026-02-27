@@ -5,7 +5,13 @@
 		"submit": "Wyślij",
 		"cancel": "Anuluj",
 		"save": "Zapisz",
-		"delete": "Usuń"
+		"delete": "Usuń",
+		"prev": "Poprzedni",
+		"next": "Następny",
+		"showing": "Pokazuje",
+		"to": "do",
+		"of": "z",
+		"results": "wyników"
 	},
 	"auth": {
 		"login": {
@@ -25,6 +31,74 @@
 		"drivers": "Kierowcy",
 		"fleet": "Flota",
 		"routes": "Trasy",
-		"settings": "Ustawienia"
+		"settings": "Ustawienia",
+		"menu": "Menu Główne",
+		"logout": "Wyloguj Się"
+	},
+	"users": {
+		"header": {
+			"search": "Szukaj użytkowników...",
+			"filters": "Filtry",
+			"create": "+ Nowy Użytkownik",
+			"manage": "Zarządzaj dostępem i rolami"
+		},
+		"filters": {
+			"role": "Rola Użytkownika",
+			"status": "Status",
+			"document": "Dokument",
+			"all": "Wszyscy"
+		},
+		"table": {
+			"user": "Użytkownik",
+			"role": "Rola",
+			"contact": "Kontakt",
+			"status": "Status",
+			"actions": "Akcje",
+			"empty": "Brak zarejestrowanych użytkowników.",
+			"itemsPerPage": "elementów na stronę"
+		},
+		"form": {
+			"createTitle": "Utwórz Nowego Użytkownika",
+			"editTitle": "Edytuj Użytkownika",
+			"name": "Imię",
+			"surname": "Nazwisko",
+			"email": "Email",
+			"password": "Hasło",
+			"passwordPlaceholderEdit": "(Opcjonalnie) Pozostaw puste",
+			"passwordPlaceholderNew": "Wymagane",
+			"documentType": "Rodzaj Dokumentu",
+			"documentNumber": "Numer Dokumentu",
+			"phone": "Telefon",
+			"role": "Rola",
+			"address": "Adres",
+			"city": "Miasto",
+			"country": "Kraj",
+			"saveChanges": "Zapisz Zmiany",
+			"createUser": "Utwórz Użytkownika"
+		},
+		"delete": {
+			"title": "Usuń Użytkownika",
+			"message": "Czy na pewno chcesz usunąć tego użytkownika?",
+			"warning": "Tej akcji nie można cofnąć.",
+			"confirm": "Tak, Usuń"
+		},
+		"constants": {
+			"roles": {
+				"ADMIN": "Administrator",
+				"USER": "Użytkownik"
+			},
+			"status": {
+				"ON": "Aktywny",
+				"OFF": "Nieaktywny"
+			}
+		},
+		"messages": {
+			"created": "Użytkownik został pomyślnie utworzony",
+			"updated": "Użytkownik został pomyślnie zaktualizowany",
+			"error": "Błąd podczas zapisywania użytkownika",
+			"statusOn": "Użytkownik aktywowany",
+			"statusOff": "Użytkownik dezaktywowany",
+			"toggleError": "Błąd podczas zmiany statusu"
+		}
 	}
 }

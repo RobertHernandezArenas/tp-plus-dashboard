@@ -10,10 +10,10 @@
 				<thead class="bg-[#000000]/80 backdrop-blur-xl">
 					<tr
 						class="border-b border-[#FFFFFF]/10 text-xs font-black tracking-wider text-[#FFFFFF]/50 uppercase">
-						<th class="px-6 py-5">Usuario</th>
-						<th class="px-6 py-5">Rol</th>
-						<th class="px-6 py-5">Estado</th>
-						<th class="px-6 py-5 text-right">Acciones</th>
+						<th class="px-6 py-5">{{ $t('users.table.user') }}</th>
+						<th class="px-6 py-5">{{ $t('users.table.role') }}</th>
+						<th class="px-6 py-5">{{ $t('users.table.status') }}</th>
+						<th class="px-6 py-5 text-right">{{ $t('users.table.actions') }}</th>
 					</tr>
 				</thead>
 				<tbody v-if="pending" class="min-h-[400px]">
@@ -64,7 +64,7 @@
 								<ShieldCheck v-if="user.role === 'ADMIN'" class="h-4 w-4 text-[#FFFF00]" />
 								<User v-else class="h-4 w-4 text-[#FFFFFF]/40" />
 								<span class="text-sm font-bold text-[#FFFFFF]/80">
-									{{ user.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}
+									{{ $t('users.constants.roles.' + user.role) }}
 								</span>
 							</div>
 						</td>
@@ -81,7 +81,7 @@
 									:class="
 										user.status === 'ON' ? 'animate-pulse bg-[#FFFF00]' : 'bg-[#FFFFFF]/30'
 									"></div>
-								{{ user.status === 'ON' ? 'Activo' : 'Inactivo' }}
+								{{ $t('users.constants.status.' + user.status) }}
 							</div>
 						</td>
 						<td class="px-6 py-4 text-right">
@@ -89,10 +89,18 @@
 								<!-- Toggle Activar/Desactivar -->
 								<div
 									class="tooltip tooltip-left"
-									:data-tip="user.status === 'ON' ? 'Desactivar Usuario' : 'Activar Usuario'">
+									:data-tip="
+										user.status === 'ON'
+											? $t('users.messages.statusOff')
+											: $t('users.messages.statusOn')
+									">
 									<button
 										class="btn btn-circle btn-sm btn-ghost hover:bg-[#FFFFFF]/10"
-										:aria-label="user.status === 'ON' ? 'Desactivar Usuario' : 'Activar Usuario'"
+										:aria-label="
+											user.status === 'ON'
+												? $t('users.messages.statusOff')
+												: $t('users.messages.statusOn')
+										"
 										@click.stop="$emit('toggle-status', user)">
 										<ToggleRight v-if="user.status === 'ON'" class="h-5 w-5 text-[#FFFF00]" />
 										<ToggleLeft v-else class="h-5 w-5 text-[#FFFFFF]/40" />
@@ -100,20 +108,20 @@
 								</div>
 
 								<!-- Editar -->
-								<div class="tooltip tooltip-left" data-tip="Editar Usuario">
+								<div class="tooltip tooltip-left" :data-tip="$t('users.form.editTitle')">
 									<button
 										class="btn btn-circle btn-sm btn-ghost hover:bg-[#FFFFFF]/10"
-										aria-label="Editar Usuario"
+										:aria-label="$t('users.form.editTitle')"
 										@click.stop="$emit('edit', user)">
 										<Pencil class="h-4 w-4 text-[#FFFFFF]/70" />
 									</button>
 								</div>
 
 								<!-- Eliminar -->
-								<div class="tooltip tooltip-left tooltip-error" data-tip="Eliminar Usuario">
+								<div class="tooltip tooltip-left tooltip-error" :data-tip="$t('users.delete.title')">
 									<button
 										class="btn btn-circle btn-sm btn-ghost hover:bg-[#ff0000]/20"
-										aria-label="Eliminar Usuario"
+										:aria-label="$t('users.delete.title')"
 										@click.stop="$emit('delete', user)">
 										<Trash2 class="h-4 w-4 text-[#ff0000]/80" />
 									</button>
@@ -143,8 +151,7 @@
 				<div class="mb-4 rounded-full bg-[#FFFFFF]/5 p-6 ring-1 ring-[#FFFFFF]/10">
 					<Users class="h-12 w-12 text-[#FFFFFF]/30" />
 				</div>
-				<h3 class="text-xl font-bold text-[#FFFFFF]">No se encontraron usuarios</h3>
-				<p class="mt-2 text-sm text-[#FFFFFF]/50">Intenta buscar con otros términos o crea uno nuevo.</p>
+				<h3 class="text-xl font-bold text-[#FFFFFF]">{{ $t('users.table.empty') }}</h3>
 			</div>
 		</div>
 

@@ -5,25 +5,25 @@
 				@click="prevPage"
 				:disabled="currentPage <= 1"
 				class="btn btn-sm btn-ghost border-[#FFFFFF]/10 text-[#FFFFFF] hover:bg-[#FFFFFF]/10 disabled:pointer-events-auto disabled:cursor-not-allowed disabled:border-[#FFFFFF]/10 disabled:text-[#FFFFFF] disabled:opacity-50 disabled:hover:bg-transparent">
-				Anterior
+				{{ $t('common.prev') }}
 			</button>
 			<button
 				@click="nextPage"
 				:disabled="currentPage >= totalPages"
 				class="btn btn-sm btn-ghost border-[#FFFFFF]/10 text-[#FFFFFF] hover:bg-[#FFFFFF]/10 disabled:pointer-events-auto disabled:cursor-not-allowed disabled:border-[#FFFFFF]/10 disabled:text-[#FFFFFF] disabled:opacity-50 disabled:hover:bg-transparent">
-				Siguiente
+				{{ $t('common.next') }}
 			</button>
 		</div>
 		<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 			<div>
 				<p class="text-sm text-[#FFFFFF]/50">
-					Mostrando
+					{{ $t('common.showing') }}
 					<span class="font-medium text-[#FFFFFF]">{{ startItem }}</span>
-					a
+					{{ $t('common.to') }}
 					<span class="font-medium text-[#FFFFFF]">{{ endItem }}</span>
-					de
+					{{ $t('common.of') }}
 					<span class="font-medium text-[#FFFFFF]">{{ totalItems }}</span>
-					resultados
+					{{ $t('common.results') }}
 				</p>
 			</div>
 			<div>

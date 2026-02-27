@@ -7,7 +7,7 @@
 				<!-- ROL -->
 				<div>
 					<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
-						Rol de Usuario
+						{{ $t('users.filters.role') }}
 					</h3>
 					<div class="flex flex-wrap gap-2">
 						<button
@@ -21,14 +21,16 @@
 									? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
 									: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
 							">
-							{{ r === 'all' ? 'Todos' : r === 'ADMIN' ? 'Administrador' : 'Usuario' }}
+							{{ r === 'all' ? $t('users.filters.all') : $t('users.constants.roles.' + r) }}
 						</button>
 					</div>
 				</div>
 
 				<!-- ESTADO -->
 				<div>
-					<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">Estado</h3>
+					<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
+						{{ $t('users.filters.status') }}
+					</h3>
 					<div class="flex flex-wrap gap-2">
 						<button
 							v-for="s in ['all', 'ON', 'OFF']"
@@ -41,7 +43,7 @@
 									? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
 									: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
 							">
-							{{ s === 'all' ? 'Todos' : s === 'ON' ? 'Activo' : 'Inactivo' }}
+							{{ s === 'all' ? $t('users.filters.all') : $t('users.constants.status.' + s) }}
 						</button>
 					</div>
 				</div>
@@ -49,7 +51,7 @@
 				<!-- TIPO DOCUMENTO -->
 				<div>
 					<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
-						Documento
+						{{ $t('users.filters.document') }}
 					</h3>
 					<div class="flex flex-wrap gap-2">
 						<button
@@ -63,7 +65,7 @@
 									? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
 									: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
 							">
-							{{ d === 'all' ? 'Todos' : d }}
+							{{ d === 'all' ? $t('users.filters.all') : d }}
 						</button>
 					</div>
 				</div>

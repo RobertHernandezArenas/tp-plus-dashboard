@@ -11,24 +11,24 @@
 					class="mb-5 rounded-full bg-[#ff0000]/10 p-5 text-[#ff0000] shadow-[0_0_30px_rgba(255,0,0,0.2)] ring-1 ring-[#ff0000]/30">
 					<AlertTriangle class="h-10 w-10" />
 				</div>
-				<h3 class="mb-2 text-2xl font-black text-[#ff0000]">Eliminar Usuario</h3>
+				<h3 class="mb-2 text-2xl font-black text-[#ff0000]">{{ $t('users.delete.title') }}</h3>
 				<p class="max-w-xs text-sm font-medium text-[#FFFFFF]/60">
-					¿Estás seguro que deseas eliminar a
-					<span class="font-bold text-[#FFFFFF]">{{ userToDelete?.name }}</span>
-					? Esta acción no se puede deshacer.
+					{{ $t('users.delete.message') }}
+					<span class="my-2 block font-bold text-[#FFFFFF]">{{ userToDelete?.name }}</span>
+					{{ $t('users.delete.warning') }}
 				</p>
 
 				<div class="mt-8 flex w-full gap-3">
 					<button
 						class="btn btn-ghost h-12 flex-1 rounded-xl border border-[#FFFFFF]/10 text-[#FFFFFF] hover:bg-[#FFFFFF]/10"
 						@click.prevent="closeModal">
-						Cancelar
+						{{ $t('common.cancel') }}
 					</button>
 					<button
 						class="btn h-12 flex-1 rounded-xl border-none bg-[#ff0000] font-bold text-[#FFFFFF] shadow-[0_0_15px_rgba(255,0,0,0.2)] hover:bg-[#cc0000]"
 						@click.prevent="executeDelete">
 						<span v-if="isDeleting" class="loading loading-spinner"></span>
-						Sí, Eliminar
+						{{ $t('users.delete.confirm') }}
 					</button>
 				</div>
 			</div>
@@ -42,6 +42,9 @@
 <script setup lang="ts">
 	import { ref } from 'vue'
 	import { AlertTriangle } from 'lucide-vue-next'
+	import { useI18n } from 'vue-i18n'
+
+	const { t } = useI18n()
 
 	const deleteModal = ref<HTMLDialogElement | null>(null)
 	const userToDelete = ref<any | null>(null)
@@ -68,11 +71,15 @@
 			})
 			userToDelete.value = null
 			emit('refresh')
-			emit('toast', { message: 'Usuario eliminado exitosamente', type: 'success' })
+			emit('toast', {
+				message: t('users.messages.deleted', 'Usuario eliminado exitosamente'),
+				type: 'success',
+			})
 		} catch (error: any) {
 			console.error('Error deleting user:', error)
 			emit('toast', {
-				message: error.data?.statusMessage || 'Error al eliminar el usuario',
+				message:
+					error.data?.statusMessage || t('users.messages.errorDelete', 'Error al eliminar el usuario'),
 				type: 'error',
 			})
 		} finally {

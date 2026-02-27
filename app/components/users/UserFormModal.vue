@@ -15,7 +15,7 @@
 
 			<div class="relative z-10">
 				<h3 class="mb-6 text-2xl font-black tracking-tight">
-					{{ editingUser ? 'Editar Usuario' : 'Crear Nuevo Usuario' }}
+					{{ editingUser ? $t('users.form.editTitle') : $t('users.form.createTitle') }}
 				</h3>
 
 				<form @submit.prevent="saveUser">
@@ -23,7 +23,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-name">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Nombre
+									{{ $t('users.form.name') }}
 								</span>
 							</label>
 							<input
@@ -35,7 +35,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-surname">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Apellidos
+									{{ $t('users.form.surname') }}
 								</span>
 							</label>
 							<input
@@ -47,7 +47,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-email">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Correo Electrónico
+									{{ $t('users.form.email') }}
 								</span>
 							</label>
 							<input
@@ -60,7 +60,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-password">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Contraseña
+									{{ $t('users.form.password') }}
 								</span>
 							</label>
 							<input
@@ -68,21 +68,25 @@
 								v-model="form.password"
 								type="password"
 								autocomplete="new-password"
-								:placeholder="editingUser ? '(Opcional) Dejar en blanco' : 'Requerida'"
+								:placeholder="
+									editingUser
+										? $t('users.form.passwordPlaceholderEdit')
+										: $t('users.form.passwordPlaceholderNew')
+								"
 								class="input input-bordered h-11 w-full rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] outline-none focus:border-[#FFFF00]/50 focus:bg-[#000000] focus:ring-1 focus:ring-[#FFFF00]/50" />
 						</div>
 
 						<div class="form-control dropdown w-full">
 							<label class="label pb-1" id="label-doctype">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Tipo Documento
+									{{ $t('users.form.documentType') }}
 								</span>
 							</label>
 							<div
 								tabindex="0"
 								role="button"
-								aria-labelledby="label-doctype"
-								class="input input-bordered flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] transition-all outline-none focus-within:border-[#FFFF00]/50 focus-within:bg-[#000000] focus-within:ring-1 focus-within:ring-[#FFFF00]/50 hover:bg-[#FFFFFF]/10">
+								class="input input-bordered flex h-11 w-full items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] focus:border-[#FFFF00]/50 focus:ring-1 focus:ring-[#FFFF00]/50 focus:outline-none"
+								aria-labelledby="label-doctype">
 								<span class="font-medium">
 									{{ form.document_type === 'PASSPORT' ? 'Pasaporte' : form.document_type }}
 								</span>
@@ -114,7 +118,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-docnum">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Núm Documento
+									{{ $t('users.form.documentNumber') }}
 								</span>
 							</label>
 							<input
@@ -127,7 +131,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-phone">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Teléfono
+									{{ $t('users.form.phone') }}
 								</span>
 							</label>
 							<input
@@ -139,22 +143,21 @@
 						<div class="form-control dropdown w-full">
 							<label class="label pb-1" id="label-role">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Rol
+									{{ $t('users.form.role') }}
 								</span>
 							</label>
 							<div
-								:tabindex="isAdmin ? 0 : -1"
+								tabindex="0"
 								role="button"
-								aria-labelledby="label-role"
-								class="input input-bordered flex h-11 w-full items-center justify-between rounded-xl border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 text-[#FFFFFF] transition-all outline-none"
+								class="input input-bordered flex h-11 w-full items-center justify-between rounded-xl border-[#FFFFFF]/10 px-4 text-[#FFFFFF]"
 								:class="
-									isAdmin
-										? 'cursor-pointer focus-within:border-[#FFFF00]/50 focus-within:bg-[#000000] focus-within:ring-1 focus-within:ring-[#FFFF00]/50 hover:bg-[#FFFFFF]/10'
-										: 'cursor-not-allowed opacity-50'
+									!isAdmin
+										? 'cursor-not-allowed bg-[#FFFFFF]/5 opacity-50'
+										: 'bg-[#FFFFFF]/5 focus:border-[#FFFF00]/50 focus:ring-1 focus:ring-[#FFFF00]/50 focus:outline-none'
 								"
 								@click.prevent="!isAdmin">
 								<span class="font-medium">
-									{{ form.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}
+									{{ $t('users.constants.roles.' + form.role) }}
 								</span>
 								<ChevronDown class="h-4 w-4 opacity-50 transition-transform" />
 							</div>
@@ -163,12 +166,13 @@
 								class="menu dropdown-content z-100 mt-1 w-full rounded-xl border border-[#FFFFFF]/10 bg-[#000000] p-2 text-[#FFFFFF] shadow-[0_8px_30px_rgb(0,0,0,0.9)]">
 								<li
 									v-for="role in [
-										{ value: 'ADMIN', label: 'Administrador' },
-										{ value: 'USER', label: 'Usuario' },
+										{ label: $t('users.constants.roles.USER'), value: 'USER' },
+										{ label: $t('users.constants.roles.ADMIN'), value: 'ADMIN' },
 									]"
 									:key="role.value">
 									<a
-										class="rounded-lg px-4 py-2.5 font-medium transition-colors hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]"
+										class="rounded-lg py-2.5 font-bold transition-all"
+										v-show="isAdmin"
 										:class="
 											form.role === role.value
 												? 'bg-[#FFFF00]/10 text-[#FFFF00]'
@@ -184,7 +188,7 @@
 						<div class="form-control md:col-span-2">
 							<label class="label pb-1" for="user-address">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Dirección
+									{{ $t('users.form.address') }}
 								</span>
 							</label>
 							<input
@@ -197,7 +201,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-city">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									Ciudad
+									{{ $t('users.form.city') }}
 								</span>
 							</label>
 							<input
@@ -209,7 +213,7 @@
 						<div class="form-control">
 							<label class="label pb-1" for="user-country">
 								<span class="label-text text-xs font-bold tracking-wider text-[#FFFFFF]/70 uppercase">
-									País
+									{{ $t('users.form.country') }}
 								</span>
 							</label>
 							<input
@@ -225,7 +229,7 @@
 							type="button"
 							class="btn btn-ghost h-12 rounded-xl border border-[#FFFFFF]/10 px-8 text-[#FFFFFF] hover:bg-[#FFFFFF]/10"
 							@click.prevent="closeModal">
-							Cancelar
+							{{ $t('common.cancel') }}
 						</button>
 						<button
 							type="submit"
