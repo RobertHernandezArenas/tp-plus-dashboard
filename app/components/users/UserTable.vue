@@ -5,9 +5,9 @@
 		<div
 			class="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-[#FFFF00]/5 to-transparent"></div>
 
-		<div class="relative z-10 w-full overflow-x-auto">
+		<div class="relative z-10 w-full overflow-hidden overflow-x-auto rounded-[2.25rem]">
 			<table class="table w-full border-collapse">
-				<thead class="bg-[#000000]/80 backdrop-blur-xl">
+				<thead class="bg-[#000000]">
 					<tr
 						class="border-b border-[#FFFFFF]/10 text-xs font-black tracking-wider text-[#FFFFFF]/50 uppercase">
 						<th class="px-6 py-5">{{ $t('users.table.user') }}</th>
