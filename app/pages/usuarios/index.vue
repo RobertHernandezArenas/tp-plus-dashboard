@@ -12,8 +12,11 @@
 			<UsersUserHeader v-model="searchQuery" @create="userForm?.showModal(null)" />
 
 			<UsersUserTable
-				:users="filteredUsers"
+				:users="paginatedUsers"
 				:pending="status === 'pending'"
+				:total-items="filteredUsers.length"
+				:items-per-page="5"
+				v-model:current-page="currentPage"
 				@edit="userForm?.showModal($event)"
 				@delete="userDeleteModal?.showModal($event)"
 				@toggle-status="toggleUserStatus" />
@@ -104,6 +107,21 @@
 				u.email.toLowerCase().includes(query) ||
 				u.role.toLowerCase().includes(query),
 		)
+	})
+
+	// --- Paginación ---
+	const currentPage = ref(1)
+	const itemsPerPage = 5
+
+	const paginatedUsers = computed(() => {
+		const start = (currentPage.value - 1) * itemsPerPage
+		const end = start + itemsPerPage
+		return filteredUsers.value.slice(start, end)
+	})
+
+	// Reset page when searching
+	watch(searchQuery, () => {
+		currentPage.value = 1
 	})
 
 	// --- Referencias a los componentes hijos ---

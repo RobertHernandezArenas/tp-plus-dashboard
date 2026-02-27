@@ -135,6 +135,14 @@
 				<p class="mt-2 text-sm text-[#FFFFFF]/50">Intenta buscar con otros términos o crea uno nuevo.</p>
 			</div>
 		</div>
+
+		<!-- Pagination Footer -->
+		<UiAppPagination
+			v-if="!pending && totalItems > itemsPerPage"
+			:total-items="totalItems"
+			:items-per-page="itemsPerPage"
+			:model-value="currentPage"
+			@update:model-value="$emit('update:currentPage', $event)" />
 	</div>
 </template>
 
@@ -144,7 +152,10 @@
 	defineProps<{
 		users: any[]
 		pending: boolean
+		totalItems: number
+		itemsPerPage: number
+		currentPage: number
 	}>()
 
-	defineEmits(['edit', 'delete', 'toggle-status'])
+	defineEmits(['edit', 'delete', 'toggle-status', 'update:currentPage'])
 </script>
