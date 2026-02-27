@@ -10,82 +10,13 @@
 		<!-- Contenedor Principal -->
 		<div class="relative z-10 mx-auto max-w-7xl space-y-8">
 			<UsersUserHeader
-				v-model="searchQuery"
-				:filters-active="hasActiveFilters"
-				@toggle-filters="showFilters = !showFilters"
+				v-model="filtersStore.searchQuery"
+				:filters-active="filtersStore.hasActiveFilters"
+				@toggle-filters="filtersStore.toggleFilters()"
 				@create="userForm?.showModal(null)" />
 
-			<!-- Filters Panel (Glassmorphism) -->
-			<transition name="expand">
-				<div
-					v-show="showFilters"
-					class="mb-6 overflow-hidden rounded-4xl border border-[#FFFFFF]/10 bg-[#000000]/40 p-6 shadow-2xl backdrop-blur-xl">
-					<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-						<!-- ROL -->
-						<div>
-							<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
-								Rol de Usuario
-							</h3>
-							<div class="flex flex-wrap gap-2">
-								<button
-									v-for="r in ['all', 'ADMIN', 'USER']"
-									:key="r"
-									@click="filterRole = r"
-									class="rounded-xl px-4 py-2 text-xs font-bold transition-all"
-									:class="
-										filterRole === r
-											? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-											: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
-									">
-									{{ r === 'all' ? 'Todos' : r === 'ADMIN' ? 'Administrador' : 'Usuario' }}
-								</button>
-							</div>
-						</div>
-
-						<!-- ESTADO -->
-						<div>
-							<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
-								Estado
-							</h3>
-							<div class="flex flex-wrap gap-2">
-								<button
-									v-for="s in ['all', 'ON', 'OFF']"
-									:key="s"
-									@click="filterStatus = s"
-									class="rounded-xl px-4 py-2 text-xs font-bold transition-all"
-									:class="
-										filterStatus === s
-											? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-											: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
-									">
-									{{ s === 'all' ? 'Todos' : s === 'ON' ? 'Activo' : 'Inactivo' }}
-								</button>
-							</div>
-						</div>
-
-						<!-- TIPO DOCUMENTO -->
-						<div>
-							<h3 class="mb-3 text-[10px] font-black tracking-widest text-[#FFFFFF]/50 uppercase">
-								Documento
-							</h3>
-							<div class="flex flex-wrap gap-2">
-								<button
-									v-for="d in ['all', 'DNI', 'PASSPORT', 'NIE']"
-									:key="d"
-									@click="filterDocType = d"
-									class="rounded-xl px-4 py-2 text-xs font-bold transition-all"
-									:class="
-										filterDocType === d
-											? 'bg-[#FFFF00] text-[#000000] shadow-[0_0_15px_rgba(255,255,0,0.2)]'
-											: 'bg-[#FFFFFF]/5 text-[#FFFFFF]/70 hover:bg-[#FFFFFF]/10 hover:text-[#FFFFFF]'
-									">
-									{{ d === 'all' ? 'Todos' : d }}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</transition>
+			<!-- Filters Panel Component -->
+			<UsersUserFilterPanel />
 
 			<UsersUserTable
 				:users="paginatedUsers"
@@ -121,30 +52,10 @@
 	</div>
 </template>
 
-<style scoped>
-	/* Animación para el panel de filtros */
-	.expand-enter-active,
-	.expand-leave-active {
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		max-height: 500px;
-		opacity: 1;
-		transform: translateY(0);
-	}
-	.expand-enter-from,
-	.expand-leave-to {
-		max-height: 0;
-		opacity: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-		margin-bottom: 0;
-		border-width: 0;
-		transform: translateY(-10px);
-	}
-</style>
-
 <script lang="ts" setup>
-	import { ref, computed } from 'vue'
+	import { ref, computed, watch } from 'vue'
 	import { useI18n } from 'vue-i18n'
+	import { useUsersFilterStore } from '~/stores/useUsersFilterStore'
 
 	const { t } = useI18n()
 
@@ -193,26 +104,11 @@
 	const { data: usersData, refresh, status } = await useFetch<UserData[]>('/api/users')
 	const users = computed(() => usersData.value || [])
 
-	// --- Filtros (UI Trend 2026) ---
-	const showFilters = ref(false)
-	const filterRole = ref('all')
-	const filterStatus = ref('all')
-	const filterDocType = ref('all')
-
-	const activeFiltersCount = computed(() => {
-		let count = 0
-		if (filterRole.value !== 'all') count++
-		if (filterStatus.value !== 'all') count++
-		if (filterDocType.value !== 'all') count++
-		return count
-	})
-
-	const hasActiveFilters = computed(() => activeFiltersCount.value > 0)
+	const filtersStore = useUsersFilterStore()
 
 	// --- Búsqueda (Search) ---
-	const searchQuery = ref('')
 	const filteredUsers = computed(() => {
-		const query = searchQuery.value.toLowerCase()
+		const query = filtersStore.searchQuery.toLowerCase()
 
 		return users.value.filter(u => {
 			// Búsqueda de texto (barra superior)
@@ -223,9 +119,10 @@
 				u.role.toLowerCase().includes(query)
 
 			// Validaciones de Filtros
-			const matchesRole = filterRole.value === 'all' || u.role === filterRole.value
-			const matchesStatus = filterStatus.value === 'all' || u.status === filterStatus.value
-			const matchesDocType = filterDocType.value === 'all' || u.document_type === filterDocType.value
+			const matchesRole = filtersStore.filterRole === 'all' || u.role === filtersStore.filterRole
+			const matchesStatus = filtersStore.filterStatus === 'all' || u.status === filtersStore.filterStatus
+			const matchesDocType =
+				filtersStore.filterDocType === 'all' || u.document_type === filtersStore.filterDocType
 
 			return matchesSearch && matchesRole && matchesStatus && matchesDocType
 		})
@@ -242,9 +139,17 @@
 	})
 
 	// Reset page when searching or filtering
-	watch([searchQuery, filterRole, filterStatus, filterDocType], () => {
-		currentPage.value = 1
-	})
+	watch(
+		() => [
+			filtersStore.searchQuery,
+			filtersStore.filterRole,
+			filtersStore.filterStatus,
+			filtersStore.filterDocType,
+		],
+		() => {
+			currentPage.value = 1
+		},
+	)
 
 	// --- Referencias a los componentes hijos ---
 	const userForm = ref<any>(null)
