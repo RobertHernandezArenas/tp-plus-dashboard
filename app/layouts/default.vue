@@ -31,7 +31,7 @@
 							class="hidden items-center gap-2 text-sm font-bold tracking-wide text-[#FFFFFF]/50 md:flex">
 							<span class="text-[#FFFF00]">Transpallet+</span>
 							<span class="text-[#FFFFFF]/20">/</span>
-							<span class="text-[#FFFFFF]">Panel de Control</span>
+							<span class="text-[#FFFFFF] capitalize">{{ currentRouteTranslated }}</span>
 						</div>
 					</div>
 
@@ -246,6 +246,16 @@
 		{ to: null, label: 'nav.routes', icon: Waypoints },
 		{ to: null, label: 'nav.settings', icon: SlidersHorizontal },
 	]
+
+	const currentRouteTranslated = computed(() => {
+		const currentNav = navItems.find(item => item.to === route.path)
+		if (currentNav) {
+			return t(currentNav.label)
+		}
+
+		const pathValue = route.path.replace('/', '')
+		return pathValue ? pathValue.replace(/-/g, ' ') : 'Panel de Control'
+	})
 </script>
 
 <style scoped>
