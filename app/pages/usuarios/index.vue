@@ -15,7 +15,7 @@
 				:users="paginatedUsers"
 				:pending="status === 'pending'"
 				:total-items="filteredUsers.length"
-				:items-per-page="5"
+				:items-per-page="itemsPerPage"
 				v-model:current-page="currentPage"
 				@edit="userForm?.showModal($event)"
 				@delete="userDeleteModal?.showModal($event)"
@@ -111,11 +111,11 @@
 
 	// --- Paginación ---
 	const currentPage = ref(1)
-	const itemsPerPage = 5
+	const itemsPerPage = ref(8)
 
 	const paginatedUsers = computed(() => {
-		const start = (currentPage.value - 1) * itemsPerPage
-		const end = start + itemsPerPage
+		const start = (currentPage.value - 1) * itemsPerPage.value
+		const end = start + itemsPerPage.value
 		return filteredUsers.value.slice(start, end)
 	})
 

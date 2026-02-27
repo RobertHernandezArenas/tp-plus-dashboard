@@ -1,6 +1,5 @@
 <template>
-	<div
-		class="drawer lg:drawer-open relative min-h-screen overflow-hidden bg-[#12110D] font-sans text-[#FFFFFF]">
+	<div class="drawer lg:drawer-open relative h-dvh overflow-hidden bg-[#12110D] font-sans text-[#FFFFFF]">
 		<!-- Elementos Decorativos de Fondo (Globales) -->
 		<div
 			class="animate-blob pointer-events-none fixed top-[-10%] left-[-5%] z-0 h-[600px] w-[600px] rounded-full bg-[#FFFF00]/5 blur-[120px] filter"></div>
@@ -9,10 +8,10 @@
 
 		<input id="my-drawer-4" v-model="isDrawerOpen" type="checkbox" class="drawer-toggle" />
 
-		<div class="drawer-content relative z-10 flex min-h-screen flex-col">
+		<div class="drawer-content relative z-10 flex h-dvh flex-col">
 			<!-- NAVBAR (Glassmorphism) -->
 			<nav
-				class="sticky top-0 z-50 w-full h-[73px] border-b border-[#FFFFFF]/10 bg-[#000000]/60 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+				class="sticky top-0 z-50 h-[73px] w-full border-b border-[#FFFFFF]/10 bg-[#000000]/60 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
 				<div class="flex w-full items-center">
 					<div class="flex-none lg:hidden">
 						<label
@@ -79,7 +78,7 @@
 		</div>
 
 		<!-- SIDEBAR (Glassmorphism) -->
-		<div class="drawer-side z-50">
+		<div class="drawer-side z-50 h-dvh">
 			<label
 				for="my-drawer-4"
 				aria-label="close sidebar"
@@ -92,8 +91,8 @@
 
 				<!-- LOGO SPACE -->
 				<div
-					class="relative z-10 flex h-[73px] w-full items-center justify-start gap-3 border-b border-[#FFFFFF]/10 p-6">
-					<div class="group relative">
+					class="relative z-10 flex h-[73px] min-h-[73px] w-full items-center justify-start gap-3 border-b border-[#FFFFFF]/10 p-6">
+					<div class="group relative shrink-0">
 						<div
 							class="absolute inset-0 rounded-full bg-[#FFFF00]/20 blur-md transition-all group-hover:blur-lg"></div>
 						<NuxtLink to="/">
@@ -108,7 +107,7 @@
 				</div>
 
 				<!-- Navegación -->
-				<div class="relative z-10 w-full grow overflow-y-auto px-4 py-6">
+				<div class="relative z-10 w-full flex-1 overflow-y-auto px-4 py-6 text-[#FFFFFF]">
 					<p class="mb-4 px-4 text-[10px] font-black tracking-widest text-[#FFFFFF]/40 uppercase">
 						Menú Principal
 					</p>
@@ -153,7 +152,7 @@
 				</div>
 
 				<!-- Footer del Sidebar -->
-				<div class="relative z-10 flex w-full flex-col gap-4 border-t border-[#FFFFFF]/10 p-6">
+				<div class="relative z-10 mt-auto flex w-full flex-col gap-4 border-t border-[#FFFFFF]/10 p-6">
 					<button
 						@click="handleLogout"
 						class="group flex w-full items-center justify-center gap-3 rounded-2xl border border-[#ff0000]/20 bg-[#ff0000]/10 px-4 py-3 font-bold text-[#ff0000] transition-all hover:bg-[#ff0000] hover:text-[#FFFFFF] hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]">

@@ -5,10 +5,9 @@
 		<div
 			class="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-[#FFFF00]/5 to-transparent"></div>
 
-		<div
-			class="relative z-10 h-[55vh] max-h-[600px] min-h-[400px] w-full overflow-x-auto overflow-y-auto sm:h-[60vh] lg:h-[calc(100vh-320px)]">
+		<div class="relative z-10 w-full overflow-x-auto">
 			<table class="table w-full border-collapse">
-				<thead class="sticky top-0 z-20 bg-[#000000]/80 backdrop-blur-xl">
+				<thead class="bg-[#000000]/80 backdrop-blur-xl">
 					<tr
 						class="border-b border-[#FFFFFF]/10 text-xs font-black tracking-wider text-[#FFFFFF]/50 uppercase">
 						<th class="px-6 py-5">Usuario</th>
@@ -17,7 +16,7 @@
 						<th class="px-6 py-5 text-right">Acciones</th>
 					</tr>
 				</thead>
-				<tbody v-if="pending">
+				<tbody v-if="pending" class="min-h-[400px]">
 					<tr v-for="i in 5" :key="i" class="border-b border-[#FFFFFF]/5">
 						<td class="px-6 py-4">
 							<div class="skeleton h-12 w-48 rounded bg-[#FFFFFF]/10"></div>
@@ -33,7 +32,7 @@
 						</td>
 					</tr>
 				</tbody>
-				<tbody v-else>
+				<tbody v-else class="min-h-[400px]">
 					<tr
 						v-for="user in users"
 						:key="user.user_id"
@@ -122,13 +121,25 @@
 							</div>
 						</td>
 					</tr>
+
+					<!-- Filas vacías para mantener la altura cuando hay menos de 5 usuarios -->
+					<tr
+						v-if="users.length > 0 && users.length < itemsPerPage"
+						v-for="i in itemsPerPage - users.length"
+						:key="`empty-${i}`"
+						class="pointer-events-none h-[81px] border-b border-transparent">
+						<td class="px-6 py-4"></td>
+						<td class="px-6 py-4"></td>
+						<td class="px-6 py-4"></td>
+						<td class="px-6 py-4"></td>
+					</tr>
 				</tbody>
 			</table>
 
 			<!-- Empty State -->
 			<div
 				v-if="!pending && users.length === 0"
-				class="flex flex-col items-center justify-center py-16 text-center">
+				class="flex min-h-[400px] flex-col items-center justify-center py-16 text-center">
 				<div class="mb-4 rounded-full bg-[#FFFFFF]/5 p-6 ring-1 ring-[#FFFFFF]/10">
 					<Users class="h-12 w-12 text-[#FFFFFF]/30" />
 				</div>
