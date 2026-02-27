@@ -100,5 +100,68 @@
 			"statusOff": "User deactivated",
 			"toggleError": "Error toggling status"
 		}
+	},
+	"overview": {
+		"hero": {
+			"title": "Welcome back",
+			"guest": "User",
+			"subtitle": "Daily operations summary"
+		},
+		"period": {
+			"yesterday": "Yesterday",
+			"today": "Today",
+			"month": "Month"
+		},
+		"kpis": {
+			"revenue": {
+				"title": "Monthly Revenue"
+			},
+			"fleet": {
+				"title": "Active Fleet",
+				"trend": "Operational"
+			},
+			"routes": {
+				"title": "Completed Routes (Today)",
+				"trend": "Routes vs Yest."
+			},
+			"drivers": {
+				"title": "Drivers on Route",
+				"trend": "Resting"
+			}
+		},
+		"charts": {
+			"weekly": "Weekly Performance",
+			"details": "Details",
+			"days": {
+				"mon": "M",
+				"tue": "T",
+				"wed": "W",
+				"thu": "T",
+				"fri": "F",
+				"sat": "S",
+				"sun": "S"
+			}
+		},
+		"activity": {
+			"title": "Recent Activity",
+			"viewAll": "View all history",
+			"timeAgo": "Ago",
+			"mock1": {
+				"title": "New route assigned to Madrid",
+				"desc": "Driver Juan Pérez has started route #TR-0892 to Madrid."
+			},
+			"mock2": {
+				"title": "Maintenance completed",
+				"desc": "The Volvo FH vehicle (License plate: 1234ABC) has finished its revision."
+			},
+			"mock3": {
+				"title": "Delay reported on route #TR-0889",
+				"desc": "30 mins delay due to heavy traffic on the A-4."
+			},
+			"mock4": {
+				"title": "Invoice paid",
+				"desc": "Client Logistics Corp has made the payment for €4,500."
+			}
+		}
 	}
 }

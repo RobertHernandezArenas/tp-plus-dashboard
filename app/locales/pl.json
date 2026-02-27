@@ -100,5 +100,68 @@
 			"statusOff": "Użytkownik dezaktywowany",
 			"toggleError": "Błąd podczas zmiany statusu"
 		}
+	},
+	"overview": {
+		"hero": {
+			"title": "Witamy ponownie",
+			"guest": "Użytkownik",
+			"subtitle": "Podsumowanie operacji dnia"
+		},
+		"period": {
+			"yesterday": "Wczoraj",
+			"today": "Dzisiaj",
+			"month": "Miesiąc"
+		},
+		"kpis": {
+			"revenue": {
+				"title": "Miesięczny Dochód"
+			},
+			"fleet": {
+				"title": "Aktywna Flota",
+				"trend": "Operacyjnych"
+			},
+			"routes": {
+				"title": "Zakończone Trasy (Dziś)",
+				"trend": "Tras vs Wczoraj"
+			},
+			"drivers": {
+				"title": "Kierowcy w Trasie",
+				"trend": "na Przerwie"
+			}
+		},
+		"charts": {
+			"weekly": "Wyniki Tygodniowe",
+			"details": "Szczegóły",
+			"days": {
+				"mon": "P",
+				"tue": "W",
+				"wed": "Ś",
+				"thu": "C",
+				"fri": "P",
+				"sat": "S",
+				"sun": "N"
+			}
+		},
+		"activity": {
+			"title": "Ostatnia Aktywność",
+			"viewAll": "Zobacz całą historię",
+			"timeAgo": "Temu",
+			"mock1": {
+				"title": "Nowa trasa przydzielona do Madrytu",
+				"desc": "Kierowca Juan Pérez rozpoczął trasę #TR-0892 do Madrytu."
+			},
+			"mock2": {
+				"title": "Konserwacja zakończona",
+				"desc": "Pojazd Volvo FH (Rejestracja: 1234ABC) zakończył przegląd."
+			},
+			"mock3": {
+				"title": "Zgłoszono opóźnienie na trasie #TR-0889",
+				"desc": "30 min opóźnienia z powodu dużego ruchu na A-4."
+			},
+			"mock4": {
+				"title": "Faktura opłacona",
+				"desc": "Wypłacono €4,500 przez klienta Logistics Corp."
+			}
+		}
 	}
 }

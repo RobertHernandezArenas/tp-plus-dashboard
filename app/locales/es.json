@@ -100,5 +100,68 @@
 			"statusOff": "Usuario desactivado",
 			"toggleError": "Error al cambiar el estado"
 		}
+	},
+	"overview": {
+		"hero": {
+			"title": "¡Hola de nuevo",
+			"guest": "Usuario",
+			"subtitle": "Resumen de operaciones del día"
+		},
+		"period": {
+			"yesterday": "Ayer",
+			"today": "Hoy",
+			"month": "Mes"
+		},
+		"kpis": {
+			"revenue": {
+				"title": "Ingresos Mensuales"
+			},
+			"fleet": {
+				"title": "Flota Activa",
+				"trend": "Operativos"
+			},
+			"routes": {
+				"title": "Rutas Completadas (Hoy)",
+				"trend": "Rutas vs Ayer"
+			},
+			"drivers": {
+				"title": "Conductores en Ruta",
+				"trend": "en Descanso"
+			}
+		},
+		"charts": {
+			"weekly": "Desempeño Semanal",
+			"details": "Detalles",
+			"days": {
+				"mon": "L",
+				"tue": "M",
+				"wed": "X",
+				"thu": "J",
+				"fri": "V",
+				"sat": "S",
+				"sun": "D"
+			}
+		},
+		"activity": {
+			"title": "Actividad Reciente",
+			"viewAll": "Ver todo el historial",
+			"timeAgo": "Hace",
+			"mock1": {
+				"title": "Nueva ruta asignada a Madrid",
+				"desc": "El conductor Juan Pérez ha iniciado la ruta #TR-0892 hacia Madrid."
+			},
+			"mock2": {
+				"title": "Mantenimiento completado",
+				"desc": "El vehículo Volvo FH (Matrícula: 1234ABC) ha finalizado su revisión."
+			},
+			"mock3": {
+				"title": "Retraso reportado en ruta #TR-0889",
+				"desc": "Retraso de 30 mins debido a tráfico denso en la A-4."
+			},
+			"mock4": {
+				"title": "Factura pagada",
+				"desc": "El cliente Logistics Corp ha realizado el pago por €4,500."
+			}
+		}
 	}
 }
