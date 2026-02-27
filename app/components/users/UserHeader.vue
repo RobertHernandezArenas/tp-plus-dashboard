@@ -11,9 +11,21 @@
 
 		<div class="flex items-center gap-4">
 			<button
-				class="btn btn-ghost h-12 rounded-2xl border border-[#FFFFFF]/10 px-4 font-semibold text-[#FFFFFF] hover:bg-[#FFFFFF]/10">
+				@click="$emit('toggle-filters')"
+				class="btn btn-ghost relative h-12 rounded-2xl border border-[#FFFFFF]/10 px-4 font-semibold transition-colors"
+				:class="
+					filtersActive
+						? 'border-[#FFFF00]/30 bg-[#FFFF00]/10 text-[#FFFF00] hover:bg-[#FFFF00]/20'
+						: 'text-[#FFFFFF] hover:bg-[#FFFFFF]/10'
+				">
 				<Filter class="mr-2 h-5 w-5" />
 				Filtros
+				<!-- Punto indicador -->
+				<span v-if="filtersActive" class="absolute -top-1 -right-1 flex h-3 w-3">
+					<span
+						class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFFF00] opacity-75"></span>
+					<span class="relative inline-flex h-3 w-3 rounded-full bg-[#FFFF00]"></span>
+				</span>
 			</button>
 			<button
 				@click="$emit('create')"
@@ -48,5 +60,9 @@
 
 	const searchQuery = defineModel<string>()
 
-	defineEmits(['create'])
+	defineProps<{
+		filtersActive?: boolean
+	}>()
+
+	defineEmits(['create', 'toggle-filters'])
 </script>
