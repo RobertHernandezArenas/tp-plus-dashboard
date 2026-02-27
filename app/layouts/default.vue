@@ -12,41 +12,47 @@
 			<!-- NAVBAR (Glassmorphism) -->
 			<nav
 				class="sticky top-0 z-50 h-[73px] w-full border-b border-[#FFFFFF]/10 bg-[#000000]/60 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
-				<div class="flex w-full items-center">
-					<div class="flex-none lg:hidden">
-						<label
-							for="my-drawer-4"
-							aria-label="open sidebar"
-							class="btn btn-square btn-ghost text-[#FFFFFF] hover:bg-[#FFFFFF]/10 hover:text-[#FFFF00]">
-							<Transition name="swap" mode="out-in">
-								<PanelLeftClose v-if="isDrawerOpen" class="h-6 w-6" />
-								<PanelLeftOpen v-else class="h-6 w-6" />
-							</Transition>
-						</label>
+				<div class="flex w-full items-center justify-between">
+					<div class="flex items-center gap-4">
+						<div class="lg:hidden">
+							<label
+								for="my-drawer-4"
+								aria-label="open sidebar"
+								class="btn btn-square btn-ghost text-[#FFFFFF] hover:bg-[#FFFFFF]/10 hover:text-[#FFFF00]">
+								<Transition name="swap" mode="out-in">
+									<PanelLeftClose v-if="isDrawerOpen" class="h-6 w-6" />
+									<PanelLeftOpen v-else class="h-6 w-6" />
+								</Transition>
+							</label>
+						</div>
+
+						<!-- Breadcrumb / Titulo en top bar -->
+						<div
+							class="hidden items-center gap-2 text-sm font-bold tracking-wide text-[#FFFFFF]/50 md:flex">
+							<span class="text-[#FFFF00]">Transpallet+</span>
+							<span class="text-[#FFFFFF]/20">/</span>
+							<span class="text-[#FFFFFF]">Panel de Control</span>
+						</div>
 					</div>
 
-					<div class="mx-2 flex-1 px-2">
-						<!-- Breadcrumb / Titulo en top bar (Opcional, futuro) -->
-					</div>
-
-					<div class="flex-none gap-4">
-						<!-- Selector de Idioma estético -->
+					<div class="flex items-center gap-4">
+						<!-- Selector de Idioma estético (Pill) -->
 						<div class="group relative">
 							<select
 								v-model="locale"
-								class="cursor-pointer appearance-none rounded-xl border border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 py-2 pr-8 text-sm font-bold text-[#FFFFFF] transition-colors outline-none hover:bg-[#FFFFFF]/10 focus:border-[#FFFF00]/50 focus:ring-1 focus:ring-[#FFFF00]/50">
+								class="cursor-pointer appearance-none rounded-full border border-[#FFFFFF]/10 bg-[#FFFFFF]/5 px-4 py-1.5 pr-8 text-xs font-black text-[#FFFFFF] uppercase shadow-inner transition-colors outline-none hover:border-[#FFFF00]/30 hover:bg-[#FFFFFF]/10 focus:border-[#FFFF00]/50 focus:ring-1 focus:ring-[#FFFF00]/50">
 								<option
 									v-for="l in locales"
 									:key="l.code"
 									:value="l.code"
 									class="bg-[#12110D] text-[#FFFFFF]">
-									{{ l.name }}
+									{{ l.code }}
 								</option>
 							</select>
 							<div
-								class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#FFFFFF]/50 transition-colors group-hover:text-[#FFFF00]">
+								class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#FFFFFF]/50 transition-colors group-hover:text-[#FFFF00]">
 								<svg
-									class="h-4 w-4 fill-current"
+									class="h-3 w-3 fill-current"
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20">
 									<path
@@ -55,18 +61,23 @@
 							</div>
 						</div>
 
-						<!-- Perfil / Notificaciones -->
-						<!-- <button
-							class="btn btn-ghost btn-circle avatar group border border-[#FFFFFF]/10 transition-all hover:border-[#FFFF00]/50 hover:bg-[#FFFFFF]/5">
-							<div class="relative w-9 overflow-hidden rounded-full">
-								<div
-									class="absolute inset-0 bg-[#FFFF00]/20 opacity-0 mix-blend-overlay transition-opacity group-hover:opacity-100"></div>
-								<img
-									src="https://i.pravatar.cc/150?u=1"
-									alt="Profile"
-									class="h-full w-full object-cover brightness-110 saturate-0 transition-all group-hover:saturate-100" />
+						<!-- Perfil rápido superior -->
+						<button
+							v-if="authStore.user"
+							class="group relative flex items-center gap-2 rounded-full border border-[#FFFFFF]/10 bg-[#FFFFFF]/5 p-1 pr-3 transition-all hover:border-[#FFFF00]/30 hover:bg-[#FFFFFF]/10">
+							<div class="avatar">
+								<div class="w-8 rounded-full ring-1 ring-[#FFFFFF]/20 group-hover:ring-[#FFFF00]/50">
+									<img
+										:src="
+											authStore.user.avatar ||
+											`https://ui-avatars.com/api/?name=${authStore.user.name}+${authStore.user.surname || ''}&background=random`
+										"
+										alt="User Avatar"
+										class="object-cover brightness-110 saturate-0 transition-all group-hover:saturate-100" />
+								</div>
 							</div>
-						</button> -->
+							<span class="text-xs font-bold text-[#FFFFFF]">{{ authStore.user.name }}</span>
+						</button>
 					</div>
 				</div>
 			</nav>
@@ -108,57 +119,81 @@
 
 				<!-- Navegación -->
 				<div class="relative z-10 w-full flex-1 overflow-y-auto px-4 py-6 text-[#FFFFFF]">
-					<p class="mb-4 px-4 text-[10px] font-black tracking-widest text-[#FFFFFF]/40 uppercase">
+					<p class="mb-4 pl-2 text-[10px] font-black tracking-widest text-[#FFFFFF]/40 uppercase">
 						Menú Principal
 					</p>
 
-					<ul class="flex w-full flex-col gap-2">
+					<ul class="flex w-full flex-col gap-1.5">
 						<li v-for="item in navItems" :key="item.to || item.label">
 							<NuxtLink
 								v-if="item.to"
 								:to="item.to"
-								class="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-4 py-3 text-left transition-all duration-300"
+								class="group flex w-full cursor-pointer items-center gap-4 rounded-[1.25rem] px-5 py-3.5 text-left transition-all duration-300"
 								:class="
 									route.path === item.to
-										? 'border border-[#FFFF00]/20 bg-[#FFFF00]/10 text-[#FFFF00] shadow-[inset_0_0_10px_rgba(255,255,0,0.1)]'
+										? 'bg-[#FFFF00] font-black text-[#000000] shadow-[0_4px_20px_rgba(255,255,0,0.15)]'
 										: 'text-[#FFFFFF]/60 hover:bg-[#FFFFFF]/5 hover:text-[#FFFFFF]'
 								">
 								<component
 									:is="item.icon"
 									class="h-5 w-5 transition-transform group-hover:scale-110"
-									:class="
-										route.path === item.to
-											? 'text-[#FFFF00] drop-shadow-[0_0_8px_rgba(255,255,0,0.8)]'
-											: ''
-									" />
-								<span class="text-sm font-bold tracking-wide">{{ t(item.label) }}</span>
-
-								<!-- Indicador activo (borde izquierdo brillante) -->
-								<div
-									v-if="route.path === item.to"
-									class="absolute left-0 h-8 w-1.5 rounded-r-full bg-[#FFFF00] shadow-[0_0_10px_#FFFF00]"></div>
+									:class="route.path === item.to ? 'text-[#000000]' : ''" />
+								<span
+									class="text-[13px] tracking-wider uppercase"
+									:class="route.path === item.to ? 'font-black' : 'font-bold'">
+									{{ t(item.label) }}
+								</span>
 							</NuxtLink>
 
 							<button
 								v-else
-								class="group flex w-full cursor-pointer items-center gap-4 rounded-2xl px-4 py-3 text-left text-[#FFFFFF]/60 transition-all duration-300 hover:bg-[#FFFFFF]/5 hover:text-[#FFFFFF]">
+								class="group flex w-full cursor-pointer items-center gap-4 rounded-[1.25rem] px-5 py-3.5 text-left text-[#FFFFFF]/60 transition-all duration-300 hover:bg-[#FFFFFF]/5 hover:text-[#FFFFFF]">
 								<component
 									:is="item.icon"
 									class="h-5 w-5 transition-transform group-hover:scale-110" />
-								<span class="text-sm font-bold tracking-wide">{{ t(item.label) }}</span>
+								<span class="text-[13px] font-bold tracking-wider uppercase">
+									{{ t(item.label) }}
+								</span>
 							</button>
 						</li>
 					</ul>
 				</div>
 
-				<!-- Footer del Sidebar -->
-				<div class="relative z-10 mt-auto flex w-full flex-col gap-4 border-t border-[#FFFFFF]/10 p-6">
-					<button
-						@click="handleLogout"
-						class="group flex w-full items-center justify-center gap-3 rounded-2xl border border-[#ff0000]/20 bg-[#ff0000]/10 px-4 py-3 font-bold text-[#ff0000] transition-all hover:bg-[#ff0000] hover:text-[#FFFFFF] hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]">
-						<LogOut class="h-5 w-5 transition-transform group-hover:-translate-x-1" />
-						<span class="text-sm">Cerrar Sesión</span>
-					</button>
+				<!-- Footer del Sidebar (Perfil + Logout) -->
+				<div
+					class="relative z-10 mt-auto flex w-full flex-col gap-4 border-t border-[#FFFFFF]/10 bg-[#000000]/20 p-5">
+					<div v-if="authStore.user" class="flex flex-col gap-4">
+						<div class="flex items-center gap-3">
+							<div class="avatar">
+								<div
+									class="w-10 rounded-full ring-2 ring-[#FFFF00]/20 ring-offset-2 ring-offset-[#000000]">
+									<img
+										:src="
+											authStore.user.avatar ||
+											`https://ui-avatars.com/api/?name=${authStore.user.name}+${authStore.user.surname || ''}&background=random`
+										"
+										alt="User Avatar"
+										class="object-cover" />
+								</div>
+							</div>
+							<div class="flex-1 overflow-hidden">
+								<p class="truncate text-sm font-bold text-[#FFFFFF]">
+									{{ authStore.user.name }} {{ authStore.user.surname }}
+								</p>
+								<p
+									class="truncate text-[10px] font-semibold tracking-widest text-[#FFFF00] uppercase">
+									{{ authStore.user.role }}
+								</p>
+							</div>
+						</div>
+
+						<button
+							@click="handleLogout"
+							class="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#FFFFFF]/5 px-4 py-2.5 font-bold text-[#FFFFFF]/60 transition-all hover:bg-[#ff0000]/10 hover:text-[#ff0000] hover:shadow-[0_0_15px_rgba(255,0,0,0.2)]">
+							<LogOut class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+							<span class="text-xs tracking-wider uppercase">Cerrar Sesión</span>
+						</button>
+					</div>
 				</div>
 			</aside>
 		</div>

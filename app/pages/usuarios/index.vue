@@ -233,7 +233,7 @@
 
 	// --- Paginación ---
 	const currentPage = ref(1)
-	const itemsPerPage = ref(8)
+	const itemsPerPage = ref(10)
 
 	const paginatedUsers = computed(() => {
 		const start = (currentPage.value - 1) * itemsPerPage.value
