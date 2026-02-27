@@ -12,7 +12,7 @@
 		<div class="drawer-content relative z-10 flex min-h-screen flex-col">
 			<!-- NAVBAR (Glassmorphism) -->
 			<nav
-				class="sticky top-0 z-50 w-full border-b border-[#FFFFFF]/10 bg-[#000000]/60 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+				class="sticky top-0 z-50 w-full h-[73px] border-b border-[#FFFFFF]/10 bg-[#000000]/60 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
 				<div class="flex w-full items-center">
 					<div class="flex-none lg:hidden">
 						<label
@@ -57,7 +57,7 @@
 						</div>
 
 						<!-- Perfil / Notificaciones -->
-						<button
+						<!-- <button
 							class="btn btn-ghost btn-circle avatar group border border-[#FFFFFF]/10 transition-all hover:border-[#FFFF00]/50 hover:bg-[#FFFFFF]/5">
 							<div class="relative w-9 overflow-hidden rounded-full">
 								<div
@@ -67,7 +67,7 @@
 									alt="Profile"
 									class="h-full w-full object-cover brightness-110 saturate-0 transition-all group-hover:saturate-100" />
 							</div>
-						</button>
+						</button> -->
 					</div>
 				</div>
 			</nav>
