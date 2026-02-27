@@ -5,9 +5,10 @@
 		<div
 			class="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-[#FFFF00]/5 to-transparent"></div>
 
-		<div class="relative z-10 w-full overflow-x-auto">
+		<div
+			class="relative z-10 h-[55vh] max-h-[600px] min-h-[400px] w-full overflow-x-auto overflow-y-auto sm:h-[60vh] lg:h-[calc(100vh-320px)]">
 			<table class="table w-full border-collapse">
-				<thead>
+				<thead class="sticky top-0 z-20 bg-[#000000]/80 backdrop-blur-xl">
 					<tr
 						class="border-b border-[#FFFFFF]/10 text-xs font-black tracking-wider text-[#FFFFFF]/50 uppercase">
 						<th class="px-6 py-5">Usuario</th>
