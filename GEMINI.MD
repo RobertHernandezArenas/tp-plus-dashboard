@@ -4,16 +4,16 @@
 
 - **Framework:** Nuxt 4 (Vue 3, Composition API, `<script setup>`).
 - **Package Manager:** pnpm (ALWAYS use `pnpm` instead of `npm` or `yarn`).
-- **Styling:** Tailwind CSS V4 (via `@tailwindcss/vite`).
+- **Styling:** Use always Daisy UI +/or Tailwind CSS V4 (via `@tailwindcss/vite`).
 - **TypeScript:** Strict mode enabled.
 
 ## 2. Best Practices & Clean Code
 
 - **Composition API:** Use `<script setup lang="ts">` exclusively. Avoid Options API.
-- **Composables:** Extract reusable logic into `composables/`. Keep them pure and side-effect free when
+- **Composables:** Extract reusable logic into `composables/`. Keep them pure and side-effect free when it is
   possible.
-- **Type Safety:** Define explicit interfaces/types for all component props, emits, component refs, and API
-  responses. Avoid `any`.
+- **Componentisation:** Componentise everything possible with a certain degree of consistency.
+- **Type Safety:** Define explicit interfaces/types for all component props, emits, component refs, and API responses. Avoid `any`.
 - **Naming Conventions:**
    - **Components:** PascalCase (e.g., `UserCard.vue`).
    - **Composables:** camelCase, prefixed with `use` (e.g., `useAuth.ts`).
